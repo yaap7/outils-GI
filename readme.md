@@ -4,6 +4,8 @@ Ceci est une pale tentative de numériser la boîte à outils de la [Gouvernance
 
 ## Développement
 
+Pour le moment, le backend est fait avec flask, et le frontend utilise [Bulma](https://bulma.io/) et aucun Javascript.
+
 Pour formater le code selon les normes de black :
 
 ``` bash
