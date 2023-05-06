@@ -5,9 +5,66 @@ import sqlite3
 from flask import abort
 from flask import Flask
 from flask import render_template
+from flask import request
 from markupsafe import escape
 
 app = Flask(__name__)
+
+
+# La liste des critères avec leur nom interne et leur nom d'affichage
+criteres = [
+    {
+        "id": "rapidite",
+        "nom": "Rapidité",
+    },
+    {
+        "id": "enjeu",
+        "nom": "Pour enjeu",
+    },
+    {
+        "id": "simplicite",
+        "nom": "Simplicité",
+    },
+    {
+        "id": "taille_groupe",
+        "nom": "Pour taille de groupe",
+    },
+    {
+        "id": "adhesion",
+        "nom": "Niveau d'adhésion généré",
+    },
+]
+# toutes les caractéristiques qui peuvent être affichées dans une famille
+caracteristiques = [
+    {
+        "id": "avantages",
+        "nom": "Avantages",
+        "couleur": "lightgreen",
+    },
+    {
+        "id": "adapte",
+        "nom": "Adapté",
+        "couleur": "lightblue",
+    },
+    {
+        "id": "inconvenients",
+        "nom": "Inconvénients",
+        "couleur": "lightcoral",
+    },
+    {
+        "id": "points_cles",
+        "nom": "Points clés",
+        "couleur": "lightgoldenrodyellow",
+    },
+]
+
+
+def debug_var(var):
+    """pour débuguer les variables."""
+    print("=============== DEBUG ==============")
+    print(f"type(var) = {type(var)}")
+    print(f"var = {var}")
+    print("================ FIN ===============")
 
 
 @app.template_filter()
@@ -26,77 +83,114 @@ def get_db_connection():
     return conn
 
 
-@app.route("/famille/<id_famille>")
-def index(id_famille=1):
-    """La page d'accueil
-    return the default web page of a familly"""
-    # toutes les caractéristiques qui peuvent être affichées dans une famille
-    criteres = [
-        {
-            "id": "rapidite",
-            "nom": "Rapidité",
-        },
-        {
-            "id": "enjeu",
-            "nom": "Pour enjeu",
-        },
-        {
-            "id": "simplicite",
-            "nom": "Simplicité",
-        },
-        {
-            "id": "taille_groupe",
-            "nom": "Pour taille de groupe",
-        },
-        {
-            "id": "adhesion",
-            "nom": "Niveau d'adhésion généré",
-        },
-    ]
-    caracteristiques = [
-        {
-            "id": "avantages",
-            "nom": "Avantages",
-            "couleur": "lightgreen",
-        },
-        {
-            "id": "adapte",
-            "nom": "Adapté",
-            "couleur": "lightblue",
-        },
-        {
-            "id": "inconvenients",
-            "nom": "Inconvénients",
-            "couleur": "lightcoral",
-        },
-        {
-            "id": "points_cles",
-            "nom": "Points clés",
-            "couleur": "lightgoldenrodyellow",
-        },
-    ]
+def retourne_une_famille(id_famille):
     conn = get_db_connection()
-    request = f"""SELECT *
+    req_select = """SELECT *
     FROM familles
-    WHERE id = {id_famille}
+    WHERE id = ?
     LIMIT 1"""
-    famille = conn.execute(request).fetchall()[0]
+    result = conn.execute(req_select, [id_famille]).fetchall()
     conn.close()
-    return render_template(
-        "famille.html",
-        famille=famille,
-        caracteristiques=caracteristiques,
-        criteres=criteres,
-    )
+    return result
 
 
-# test d'apprentissage
+def retourne_toutes_les_familles():
+    conn = get_db_connection()
+    req_select = """SELECT *
+    FROM familles"""
+    result = conn.execute(req_select).fetchall()
+    conn.close()
+    return result
 
 
 @app.route("/")
 @app.route("/index/")
-def hello():
-    return "<h1>Hello, World!</h1>"
+@app.route("/index.html")
+def index():
+    """Renvoie la page d'accueil"""
+    familles = retourne_toutes_les_familles()
+    return render_template(
+        "index.html",
+        familles=familles,
+    )
+
+
+@app.route("/famille/<id_famille>")
+def get_famille(id_famille):
+    """Affiche le détail d'une famille."""
+    result = retourne_une_famille(id_famille)
+    if len(result) > 0:
+        famille = result[0]
+        return render_template(
+            "famille.html",
+            famille=famille,
+            caracteristiques=caracteristiques,
+            criteres=criteres,
+        )
+    else:
+        return "famille introuvable."
+
+
+def get_famille_score(famille, criteres_voulus):
+    """Retourne le score d'une famille par rapport aux critères voulus.
+    La famille est l'objet retourné par fetchall() de la DB
+    Les criteres_voulus sont de cette forme :
+    criteres_voulus = {
+        "rapidite": 4,
+        "enjeu": 7,
+    }
+    La valeur pour les critères voulus doit être comprise entre 0 et 13 compris.
+
+    Pour chaque critère, la famille gagne les points suivants :
+    - 3 si c'est du vert foncé ;
+    - 1 si c'est du vert clair ;
+    - -1 si c'est du blanc.
+    """
+
+    def get_affinity(critere_famille, critere_voulu):
+        if critere_famille[critere_voulu] == "0":
+            return -1
+        elif critere_famille[critere_voulu] == "1":
+            return 1
+        elif critere_famille[critere_voulu] == "2":
+            return 3
+        else:
+            return -9000
+
+    score = 0
+    for critere_voulu in criteres_voulus:
+        score += get_affinity(
+            famille[critere_voulu], int(criteres_voulus[critere_voulu])
+        )
+    return score
+
+
+@app.route("/recherche")
+def get_recherche():
+    id_criteres = [i["id"] for i in criteres]
+    criteres_voulus = {}
+    for id_critere in id_criteres:
+        if id_critere in request.args:
+            criteres_voulus[id_critere] = request.args.get(id_critere)
+    print(criteres_voulus)
+    score_familles = {}
+    for famille in retourne_toutes_les_familles():
+        score = get_famille_score(famille, criteres_voulus)
+        print(f"le score de la famille {famille['titre']} = {score}")
+        score_familles[famille] = score
+    debug_var(score_familles)
+    famille_triees = []
+    for famille, score in sorted(
+        score_familles.items(), key=lambda x: x[1], reverse=True
+    ):
+        famille_triees.append((famille, score))
+    return render_template(
+        "recherche.html",
+        famille_triees=famille_triees,
+    )
+
+
+# test d'apprentissage
 
 
 @app.route("/about/")

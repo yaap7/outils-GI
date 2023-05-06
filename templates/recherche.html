@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Boîte à outils de la Gouvernance Intégrative</title>
+    <meta name="description" content="Résultat de recherche de famille de processus de décision.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <style>
+        .text-center {
+          text-align: center;
+        }
+        ol {
+          padding-left: 2rem;
+        }
+        ul {
+          list-style: inside;
+        }
+    </style>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title is-1 text-center" id="titre">
+        Liste des scores
+      </h1>
+      <ol>
+        {% for famille in famille_triees %}
+          <li>La famille de processus « <a href="famille/{{ famille[0]['id']}}">{{ famille[0]["titre"] }}</a> » a obtenu un score de {{ famille[1] }}</li>
+        {% endfor %}
+      </ol>
+    </div>
+  </section>
+
+  </body>
+</html>
