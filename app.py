@@ -6,7 +6,11 @@ from flask import abort
 from flask import Flask
 from flask import render_template
 from flask import request
+from os import path
 from markupsafe import escape
+
+PROJECT_ROOT = path.dirname(path.realpath(__file__))
+DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
 
 app = Flask(__name__)
 
@@ -69,6 +73,7 @@ def debug_var(var):
 
 @app.template_filter()
 def crit_filter(crit):
+    """Renvoie la valeur de l'opacité en fonction du code du critère."""
     result = {
         "0": "0",
         "1": "0.5",
@@ -78,12 +83,16 @@ def crit_filter(crit):
 
 
 def get_db_connection():
-    conn = sqlite3.connect("database.db")
+    """Renvoie une connexion à la base de données."""
+    conn = sqlite3.connect(DATABASE_PATH)
     conn.row_factory = sqlite3.Row
     return conn
 
 
 def retourne_une_famille(id_famille):
+    """Retourne uniquement une famille.
+    Prend l'ID de la famille en argument.
+    Renvoie un dictionnaire"""
     conn = get_db_connection()
     req_select = """SELECT *
     FROM familles
@@ -95,6 +104,8 @@ def retourne_une_famille(id_famille):
 
 
 def retourne_toutes_les_familles():
+    """Retourne toute les familles de la base de données.
+    Renvoie une liste de dictionnaire."""
     conn = get_db_connection()
     req_select = """SELECT *
     FROM familles"""
@@ -167,6 +178,7 @@ def get_famille_score(famille, criteres_voulus):
 
 @app.route("/recherche")
 def get_recherche():
+    """Fonction de recherche. à améliorer."""
     id_criteres = [i["id"] for i in criteres]
     criteres_voulus = {}
     for id_critere in id_criteres:
