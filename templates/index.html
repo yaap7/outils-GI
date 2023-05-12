@@ -31,14 +31,14 @@
         <div class="columns">
           <div class="column">
             <h2 class="title is-2 text-center" id="titre">
-                Familles de processus
+                Processus
             </h2>
             <p class="subtitle text-center">
-                Voici la liste des familles de processus de prise de décision en groupe
+                Voici la liste des processus de prise de décision en groupe
             </p>
             <ul>
-              {% for famille in familles %}
-                <li><a href="famille/{{ famille['id'] }}">{{ famille["titre"]}}</a></li>
+              {% for process in processus %}
+                <li><a href="processus/{{ process['id'] }}">{{ process["titre"]}}</a></li>
               {% endfor %}
             </ul>
           </div>

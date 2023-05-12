@@ -25,8 +25,8 @@
         Liste des scores
       </h1>
       <ol>
-        {% for famille in famille_triees %}
-          <li>La famille de processus « <a href="famille/{{ famille[0]['id']}}">{{ famille[0]["titre"] }}</a> » a obtenu un score de {{ famille[1] }}</li>
+        {% for process in processus_triees %}
+          <li>Le processus « <a href="processus/{{ process[0]['id']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
         {% endfor %}
       </ol>
     </div>

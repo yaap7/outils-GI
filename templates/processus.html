@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Boîte à outils de la Gouvernance Intégrative</title>
-    <meta name="description" content="Fiche récapitulative de la famille de processus &quot;{{ famille['titre'] }}&quot; tel que décrit dans la Gouvernance Intégrative.">
+    <meta name="description" content="Fiche récapitulative du processus &quot;{{ processus['titre'] }}&quot; tel que décrit dans la Gouvernance Intégrative.">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <style>
         .text-center {
@@ -44,13 +44,13 @@
   <section class="section">
     <div class="container">
       <h1 class="title is-1 text-center" id="titre">
-        {{ famille['titre'] }}
+        {{ processus['titre'] }}
       </h1>
       <p class="subtitle text-center">
-        Fiche récapitulative de famille de processus
+        Fiche récapitulative de processus de processus
       </p>
       <div id="description">
-        {{ famille['description']|safe }}
+        {{ processus['description']|safe }}
       </div>
     </div>
   </section>
@@ -64,7 +64,7 @@
               <h2 class="title is-4">
                 {{ critere["nom"] }}
               </h2>
-              {% for i in famille[critere["id"]] %}
+              {% for i in processus[critere["id"]] %}
                 <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="crit">
                   <!-- Rounded corner rectangle -->
                   <rect x="1" y="1" width="28" height="28" rx="5" style="fill:#1d7735;fill-opacity:{{ i | crit_filter }};stroke:black;stroke-width:2px;" />
@@ -75,7 +75,7 @@
         </div>
         <div class="column" id="caracteristiques">
           {% for caracteristique in caracteristiques %}             
-            {% if famille[caracteristique["id"]] %}
+            {% if processus[caracteristique["id"]] %}
               <div class="caracteristique" style="border-color: {{ caracteristique["couleur"] }};">
                 <div class="caracteristique-titre" style="background-color: {{ caracteristique["couleur"] }};">
                   <h2 class="title is-4 text-center">
@@ -83,7 +83,7 @@
                   </h2>
                 </div>
                 <div class="caracteristique-contenu">
-                  {{ famille[caracteristique["id"]]|safe }}
+                  {{ processus[caracteristique["id"]]|safe }}
                 </div>
               </div>
             {% endif %}

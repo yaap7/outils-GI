@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS familles;
+DROP TABLE IF EXISTS processus;
 
-CREATE TABLE familles (
+CREATE TABLE processus (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     titre TEXT NOT NULL,
     description TEXT NOT NULL,

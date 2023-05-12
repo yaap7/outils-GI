@@ -2,12 +2,10 @@
 # https://www.digitalocean.com/community/tutorials/how-to-create-your-first-web-application-using-flask-and-python-3
 
 import sqlite3
-from flask import abort
+from os import path
 from flask import Flask
 from flask import render_template
 from flask import request
-from os import path
-from markupsafe import escape
 
 PROJECT_ROOT = path.dirname(path.realpath(__file__))
 DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
@@ -38,7 +36,7 @@ criteres = [
         "nom": "Niveau d'adhésion généré",
     },
 ]
-# toutes les caractéristiques qui peuvent être affichées dans une famille
+# toutes les caractéristiques qui peuvent être affichées dans un processus
 caracteristiques = [
     {
         "id": "avantages",
@@ -89,26 +87,26 @@ def get_db_connection():
     return conn
 
 
-def retourne_une_famille(id_famille):
-    """Retourne uniquement une famille.
-    Prend l'ID de la famille en argument.
+def retourne_un_processus(id_processus):
+    """Retourne uniquement un processus.
+    Prend l'ID du processus en argument.
     Renvoie un dictionnaire"""
     conn = get_db_connection()
     req_select = """SELECT *
-    FROM familles
+    FROM processus
     WHERE id = ?
     LIMIT 1"""
-    result = conn.execute(req_select, [id_famille]).fetchall()
+    result = conn.execute(req_select, [id_processus]).fetchall()
     conn.close()
     return result
 
 
-def retourne_toutes_les_familles():
-    """Retourne toute les familles de la base de données.
+def retourne_tous_les_processus():
+    """Retourne tous les processus de la base de données.
     Renvoie une liste de dictionnaire."""
     conn = get_db_connection()
     req_select = """SELECT *
-    FROM familles"""
+    FROM processus"""
     result = conn.execute(req_select).fetchall()
     conn.close()
     return result
@@ -119,32 +117,31 @@ def retourne_toutes_les_familles():
 @app.route("/index.html")
 def index():
     """Renvoie la page d'accueil"""
-    familles = retourne_toutes_les_familles()
+    processus = retourne_tous_les_processus()
     return render_template(
         "index.html",
-        familles=familles,
+        processus=processus,
     )
 
 
-@app.route("/famille/<id_famille>")
-def get_famille(id_famille):
-    """Affiche le détail d'une famille."""
-    result = retourne_une_famille(id_famille)
+@app.route("/processus/<id_processus>")
+def get_processus(id_processus):
+    """Affiche le détail d'un processus."""
+    result = retourne_un_processus(id_processus)
     if len(result) > 0:
-        famille = result[0]
+        processus = result[0]
         return render_template(
-            "famille.html",
-            famille=famille,
+            "processus.html",
+            processus=processus,
             caracteristiques=caracteristiques,
             criteres=criteres,
         )
-    else:
-        return "famille introuvable."
+    return "processus introuvable."
 
 
-def get_famille_score(famille, criteres_voulus):
-    """Retourne le score d'une famille par rapport aux critères voulus.
-    La famille est l'objet retourné par fetchall() de la DB
+def get_processus_score(processus, criteres_voulus):
+    """Retourne le score d'un processus par rapport aux critères voulus.
+    le processus est l'objet retourné par fetchall() de la DB
     Les criteres_voulus sont de cette forme :
     criteres_voulus = {
         "rapidite": 4,
@@ -152,18 +149,18 @@ def get_famille_score(famille, criteres_voulus):
     }
     La valeur pour les critères voulus doit être comprise entre 0 et 13 compris.
 
-    Pour chaque critère, la famille gagne les points suivants :
+    Pour chaque critère, le processus gagne les points suivants :
     - 3 si c'est du vert foncé ;
     - 1 si c'est du vert clair ;
     - -1 si c'est du blanc.
     """
 
-    def get_affinity(critere_famille, critere_voulu):
-        if critere_famille[critere_voulu] == "0":
+    def get_affinity(critere_processus, critere_voulu):
+        if critere_processus[critere_voulu] == "0":
             return -1
-        elif critere_famille[critere_voulu] == "1":
+        elif critere_processus[critere_voulu] == "1":
             return 1
-        elif critere_famille[critere_voulu] == "2":
+        elif critere_processus[critere_voulu] == "2":
             return 3
         else:
             return -9000
@@ -171,7 +168,7 @@ def get_famille_score(famille, criteres_voulus):
     score = 0
     for critere_voulu in criteres_voulus:
         score += get_affinity(
-            famille[critere_voulu], int(criteres_voulus[critere_voulu])
+            processus[critere_voulu], int(criteres_voulus[critere_voulu])
         )
     return score
 
@@ -184,46 +181,16 @@ def get_recherche():
     for id_critere in id_criteres:
         if id_critere in request.args:
             criteres_voulus[id_critere] = request.args.get(id_critere)
-    print(criteres_voulus)
-    score_familles = {}
-    for famille in retourne_toutes_les_familles():
-        score = get_famille_score(famille, criteres_voulus)
-        print(f"le score de la famille {famille['titre']} = {score}")
-        score_familles[famille] = score
-    debug_var(score_familles)
-    famille_triees = []
-    for famille, score in sorted(
-        score_familles.items(), key=lambda x: x[1], reverse=True
+    score_processus = {}
+    for processus in retourne_tous_les_processus():
+        score = get_processus_score(processus, criteres_voulus)
+        score_processus[processus] = score
+    processus_triees = []
+    for processus, score in sorted(
+        score_processus.items(), key=lambda x: x[1], reverse=True
     ):
-        famille_triees.append((famille, score))
+        processus_triees.append((processus, score))
     return render_template(
         "recherche.html",
-        famille_triees=famille_triees,
+        processus_triees=processus_triees,
     )
-
-
-# test d'apprentissage
-
-
-@app.route("/about/")
-def about():
-    return "<h3>This is a Flask web application.</h3>"
-
-
-@app.route("/capitalize/<word>/")
-def capitalize(word):
-    return f"<h1>{escape(word.capitalize())}</h1>"
-
-
-@app.route("/add/<int:n1>/<int:n2>/")
-def add(n1, n2):
-    return f"<h1>{n1 + n2}</h1>"
-
-
-@app.route("/users/<int:user_id>/")
-def greet_user(user_id):
-    users = ["Bob", "Jane", "Adam"]
-    try:
-        return f"<h2>Hi {users[user_id]}</h2>"
-    except IndexError:
-        abort(404)

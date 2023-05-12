@@ -13,8 +13,9 @@ Page 8 : dans ne => dans une
 Page 10 : pareil
 """
 
-familles = [
+processus = [
     {
+        "id": 100,
         "titre": "Votes à choix multiples",
         "description": """Les votes à choix multiples sont une famille de processus de décision dont le point commun est, sur un sujet donnée, de :
         <ul>
@@ -45,6 +46,7 @@ familles = [
         "adhesion":      "00001111222221",
     },
     {
+        "id": 101,
         "titre": "Vote pondéré",
         "description": """<b>Processus</b>, en réunion :<br>
         <ol>
@@ -81,6 +83,7 @@ familles = [
         "adhesion":      "00000001222221",
     },
     {
+        "id": 102,
         "titre": "Vote par approbation",
         "description": """<b>Processus</b>, en réunion :
             <ol>
@@ -117,6 +120,7 @@ familles = [
         "adhesion": "00000001222221",
     },
     {
+        "id": 200,
         "titre": "Vote à la majorité",
         "description": """<b>Processus</b>, en réunion :
             <ol>
@@ -149,6 +153,7 @@ familles = [
         "adhesion":      "00011222211000",
     },
     {
+        "id": 300,
         "titre": "Processus consultatifs",
         "description": """Une personne (le décideur) décide seul d’un sujet après avoir demandé leurs opinions aux personnes concernées ou compétentes.<br>
 Le processus de consultation peut être informel, souvent oral ou formalisé et mis par écrit (sur un tableau ou sur informatique).<br>
@@ -177,6 +182,7 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion":      "00111111111000",
     },
     {
+        "id": 301,
         "titre": "Sollicitation d’avis",
         "description": """Une personne (le décideur) est souveraine pour décider d’un sujet, mais elle a l’obligation de consulter toutes les personnes concernées ou compétentes. Une fois les consultations finies, elle décide seule et annonce sa décision au groupe.<br>
         La personne peut se saisir d’un sujet de sa propre initiative ou celui-ci peut lui être confié par le groupe.""",
@@ -204,6 +210,7 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion":      "00111222111000",
     },
     {
+        "id": 302,
         "titre": "Partage d’intention",
         "description": """La personne qui veut prendre une décision l’annonce en réunion, sur un tableau ou sur informatique.<br>
         Le principe est « qui ne dit mot consent », en l’absence de retour, elle met en œuvre sa décision. De préférence, si la décision n’est pas réversible, elle attend avant de la mettre en œuvre.""",
@@ -230,6 +237,7 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion":      "12211000000000",
     },
     {
+        "id": 303,
         "titre": "Consultation présentielle",
         "description": """<b>Processus</b> : Une personne, le décideur, a la responsabilité d’une décision. Lors d’une réunion a lieu :<br>
         <ol>
@@ -261,6 +269,7 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
     },
     # TODO : to be continued at "Processus de décision horizontaux - égalitaires"
     {
+        "id": 888,
         "titre": "",
         "description": """""",
         "avantages": """<ul>
@@ -282,6 +291,7 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion":      "12211000000000",
     },
     {
+        "id": 999, # TODO change this ID
         "titre": "Tradition, habitudes",
         "description": """<b>Processus</b><br>
             Cela peut être un choix conscient : « on fait comme d’habitude ». Mais la plupart du temps c’est une manière inconsciente de ne pas (re)prendre une décision.""",
@@ -311,9 +321,10 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
     },
 ]
 
-for famille in familles:
+for process in processus:
     cur.execute(
-        """INSERT INTO familles (
+        """INSERT INTO processus (
+                    id,
                     titre,
                     description,
                     avantages,
@@ -325,19 +336,20 @@ for famille in familles:
                     simplicite,
                     taille_groupe,
                     adhesion
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
         (
-            famille["titre"],
-            famille["description"],
-            famille["avantages"],
-            famille["adapte"],
-            famille["inconvenients"],
-            famille["points_cles"],
-            famille["rapidite"],
-            famille["enjeu"],
-            famille["simplicite"],
-            famille["taille_groupe"],
-            famille["adhesion"],
+            process["id"],
+            process["titre"],
+            process["description"],
+            process["avantages"],
+            process["adapte"],
+            process["inconvenients"],
+            process["points_cles"],
+            process["rapidite"],
+            process["enjeu"],
+            process["simplicite"],
+            process["taille_groupe"],
+            process["adhesion"],
         ),
     )
 
