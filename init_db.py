@@ -39,11 +39,11 @@ processus = [
             <li>parfois délicat à faciliter</li>
             </ul>""",
         "points_cles": """""",
-        "rapidite":      "00011111111000",
-        "enjeu":         "00011122222211",
-        "simplicite":    "00011111111111",
+        "rapidite": "00011111111000",
+        "enjeu": "00011122222211",
+        "simplicite": "00011111111111",
         "taille_groupe": "01222222222222",
-        "adhesion":      "00001111222221",
+        "adhesion": "00001111222221",
     },
     {
         "id": 101,
@@ -76,11 +76,11 @@ processus = [
             <li>les étapes peuvent être réparties sur plusieurs réunions</li>
             <li>l’étape 3 peut être préférable en sous-groupe</li>
             </ul>""",
-        "rapidite":      "00011122100000",
-        "enjeu":         "00000000112222",
-        "simplicite":    "00000000112222",
+        "rapidite": "00011122100000",
+        "enjeu": "00000000112222",
+        "simplicite": "00000000112222",
         "taille_groupe": "01222222222222",
-        "adhesion":      "00000001222221",
+        "adhesion": "00000001222221",
     },
     {
         "id": 102,
@@ -146,11 +146,11 @@ processus = [
         "points_cles": """<ul>
             <li>La personne qui formule la proposition a un pouvoir énorme, risque de manipulation.</li>
             </ul>""",
-        "rapidite":      "00000001210000",
-        "enjeu":         "00011122221100",
-        "simplicite":    "22100000000000",
+        "rapidite": "00000001210000",
+        "enjeu": "00011122221100",
+        "simplicite": "22100000000000",
         "taille_groupe": "01222222222222",
-        "adhesion":      "00011222211000",
+        "adhesion": "00011222211000",
     },
     {
         "id": 300,
@@ -175,11 +175,11 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>Demande un bon niveau de confiance dans le groupe et vis à vis du décideur</li>
             <li>Savoir identifier si une décision nécessite de consulter et qui consulter</li>
             </ul>""",
-        "rapidite":      "00111111111000",
-        "enjeu":         "00111111111100",
-        "simplicite":    "01111111000000",
+        "rapidite": "00111111111000",
+        "enjeu": "00111111111100",
+        "simplicite": "01111111000000",
         "taille_groupe": "11111111111100",
-        "adhesion":      "00111111111000",
+        "adhesion": "00111111111000",
     },
     {
         "id": 301,
@@ -203,11 +203,11 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>Demande un bon niveau de confiance dans le groupe et vis à vis du décideur</li>
             <li>Dépendant de la capacité d’écoute et de synthèse du décideur</li>
             </ul>""",
-        "rapidite":      "00112221000000",
-        "enjeu":         "00122222222100",
-        "simplicite":    "01222211000000",
+        "rapidite": "00112221000000",
+        "enjeu": "00122222222100",
+        "simplicite": "01222211000000",
         "taille_groupe": "22222222110000",
-        "adhesion":      "00111222111000",
+        "adhesion": "00111222111000",
     },
     {
         "id": 302,
@@ -230,11 +230,11 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>bien formuler « J’ai l’intention de ... » plutôt que « J’ai décidé de... »</li>
             <li>demande de l’ouverture de la part du décideur et du courage de la part des timides.</li>
             </ul>""",
-        "rapidite":      "00112221000000",
-        "enjeu":         "01222100000000",
-        "simplicite":    "22100000000000",
+        "rapidite": "00112221000000",
+        "enjeu": "01222100000000",
+        "simplicite": "22100000000000",
         "taille_groupe": "22222211100000",
-        "adhesion":      "12211000000000",
+        "adhesion": "12211000000000",
     },
     {
         "id": 303,
@@ -261,11 +261,11 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>demande un bon niveau de confiance dans le groupe et vis à vis du décideur</li>
             <li>dépendant de la capacité d’écoute et de synthèse du décideur</li>
             </ul>""",
-        "rapidite":      "00000012210000",
-        "enjeu":         "00001112222222",
-        "simplicite":    "01221000000000",
+        "rapidite": "00000012210000",
+        "enjeu": "00001112222222",
+        "simplicite": "01221000000000",
         "taille_groupe": "22222110000000",
-        "adhesion":      "00000011222211",
+        "adhesion": "00000011222211",
     },
     # TODO : to be continued at "Processus de décision horizontaux - égalitaires"
     {
@@ -284,14 +284,14 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "points_cles": """<ul>
             <li></li>
             </ul>""",
-        "rapidite":      "00112221000000",
-        "enjeu":         "01222100000000",
-        "simplicite":    "22100000000000",
+        "rapidite": "00112221000000",
+        "enjeu": "01222100000000",
+        "simplicite": "22100000000000",
         "taille_groupe": "22222211100000",
-        "adhesion":      "12211000000000",
+        "adhesion": "12211000000000",
     },
     {
-        "id": 999, # TODO change this ID
+        "id": 999,  # TODO change this ID
         "titre": "Tradition, habitudes",
         "description": """<b>Processus</b><br>
             Cela peut être un choix conscient : « on fait comme d’habitude ». Mais la plupart du temps c’est une manière inconsciente de ne pas (re)prendre une décision.""",
