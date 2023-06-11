@@ -1,97 +1,62 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boîte à outils de la Gouvernance Intégrative</title>
-    <meta name="description" content="Fiche récapitulative du processus &quot;{{ processus['titre'] }}&quot; tel que décrit dans la Gouvernance Intégrative.">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <style>
-        .text-center {
-          text-align: center;
-        }
-        ol {
-          padding-left: 2rem;
-        }
-        ul {
-          list-style: inside;
-        }
-        .caracteristique {
-          border: 3px lightblue solid;
-          border-radius: 5px;
-          margin: 5px;
-        }
-        .caracteristique-titre {
-          background-color: lightblue;
-          padding: 2px;
-        }
-        .caracteristique-contenu {
-          padding: 2px;
-        }
-        @media screen and (max-width: 1215px) {
-          svg.crit {
-            width: 20px;
-          }
-        }
-        @media screen and (min-width: 1216px) {
-          svg.crit {
-            width: 30px;
-          }
-        }
-    </style>
-  </head>
-  <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title is-1 text-center" id="titre">
-        {{ processus['titre'] }}
-      </h1>
-      <p class="subtitle text-center">
-        Fiche récapitulative de processus de processus
-      </p>
-      <div id="description">
-        {{ processus['description']|safe }}
-      </div>
-    </div>
-  </section>
+{% extends 'layout.html' %}
 
-  <section class="section">
-    <div class="container">
-      <div class="columns">
-        <div class="column text-center" id="criteres">
-          {% for critere in criteres %}
-            <div class="critere">
-              <h2 class="title is-4">
-                {{ critere["nom"] }}
-              </h2>
-              {% for i in processus[critere["id"]] %}
-                <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="crit">
-                  <!-- Rounded corner rectangle -->
-                  <rect x="1" y="1" width="28" height="28" rx="5" style="fill:#1d7735;fill-opacity:{{ i | crit_filter }};stroke:black;stroke-width:2px;" />
-                </svg>
-              {% endfor %}
-            </div>
-          {% endfor %}
-        </div>
-        <div class="column" id="caracteristiques">
-          {% for caracteristique in caracteristiques %}             
-            {% if processus[caracteristique["id"]] %}
-              <div class="caracteristique" style="border-color: {{ caracteristique["couleur"] }};">
-                <div class="caracteristique-titre" style="background-color: {{ caracteristique["couleur"] }};">
-                  <h2 class="title is-4 text-center">
-                    {{ caracteristique["nom"] }}
-                  </h2>
-                </div>
-                <div class="caracteristique-contenu">
-                  {{ processus[caracteristique["id"]]|safe }}
-                </div>
+{% block head %}
+  <meta name="description" content="Fiche récapitulative du processus &quot;{{ processus['titre'] }}&quot; tel que décrit dans la Gouvernance Intégrative.">
+{% endblock %}
+
+{% block body %}
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1 text-center" id="titre">
+      {{ processus['titre'] }}
+    </h1>
+    <p class="subtitle text-center">
+      Fiche récapitulative de processus de processus
+    </p>
+    <div id="description">
+      {{ processus['description']|safe }}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column text-center" id="criteres">
+        {% for critere in criteres %}
+          <div class="critere">
+            <h2 class="title is-4">
+              {{ critere["nom"] }}
+            </h2>
+            {% for i in processus[critere["id"]] %}
+              <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="crit">
+                <!-- Rounded corner rectangle -->
+                <rect x="1" y="1" width="28" height="28" rx="5" style="fill:#1d7735;fill-opacity:{{ i | crit_filter }};stroke:black;stroke-width:2px;" />
+              </svg>
+            {% endfor %}
+          </div>
+          <div>
+            {% include 'legende_' + critere["id"] + '.j2' %}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="column" id="caracteristiques">
+        {% for caracteristique in caracteristiques %}             
+          {% if processus[caracteristique["id"]] %}
+            <div class="caracteristique" style="border-color: {{ caracteristique["couleur"] }};">
+              <div class="caracteristique-titre" style="background-color: {{ caracteristique["couleur"] }};">
+                <h2 class="title is-4 text-center">
+                  {{ caracteristique["nom"] }}
+                </h2>
               </div>
-            {% endif %}
-          {% endfor %}
-        </div>
+              <div class="caracteristique-contenu">
+                {{ processus[caracteristique["id"]]|safe }}
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
-  </section>
-
-  </body>
-</html>
+  </div>
+</section>
+{% endblock %}

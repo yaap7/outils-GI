@@ -1,205 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Boîte à outils de la Gouvernance Intégrative</title>
-    <meta name="description" content="Boîte à outils numérique de la Gouvernance Intégrative.">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <style>
-        .text-center {
-          text-align: center;
-        }
-        ol {
-          padding-left: 2rem;
-        }
-        ul {
-          list-style: inside;
-        }
-        .table.table-radio {
-          margin-bottom: 0px;
-        }
-    </style>
-  </head>
-  <body>
+{% extends 'layout.html' %}
 
-    <section class="section">
-      <div class="container">
-        <h1 class="title is-1 text-center" id="titre">
-            Boîte à outils numérique de la Gouvernance Intégrative
-        </h1>
-        <div class="columns">
-          <div class="column">
-            <h2 class="title is-2 text-center" id="titre">
-                Processus
-            </h2>
-            <p class="subtitle text-center">
-                Voici la liste des processus de prise de décision en groupe
-            </p>
-            <ul>
-              {% for process in processus %}
-                <li><a href="processus/{{ process['id'] }}">{{ process["titre"]}}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
+{% block head %}
+  <meta name="description" content="Boîte à outils numérique de la Gouvernance Intégrative.">
+{% endblock %}
 
-          <div class="column">
-            <h2 class="title is-2 text-center" id="titre">
-              Recherche
-            </h2>
-            <p class="subtitle text-center">
-              Vous pouvez aussi faire une recherche par critères
-            </p>
-            <form action="recherche" method="get">
-              <!-- Rapidité -->
-              <label class="label">Rapidité</label>
-              <table class="table is-fullwidth text-center table-radio">
-                <tr>
-                  {% for num in range(14) %}
-                    <td><input type="radio" name="rapidite" value="{{ num }}"></td>
-                  {% endfor %}
-                </tr>
-              </table>
-              <table class="table is-fullwidth text-center">
-                <tr>
-                  <td>Semaines</td>
-                  <td></td>
-                  <td></td>
-                  <td>Jours</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Heures</td>
-                  <td></td>
-                  <td></td>
-                  <td>Minutes</td>
-                  <td></td>
-                  <td></td>
-                  <td>Secondes</td>
-                </tr>
-              </table>
-
-              <!-- Enjeu -->
-              <label class="label">Pour enjeu</label>
-              <table class="table is-fullwidth text-center table-radio">
-                <tr>
-                  {% for num in range(14) %}
-                    <td><input type="radio" name="enjeu" value="{{ num }}"></td>
-                  {% endfor %}
-                </tr>
-              </table>
-              <table class="table is-fullwidth text-center">
-                <tr>
-                  <td>Faible</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Fort</td>
-                </tr>
-              </table>
-
-              <!-- Simplicité -->
-              <label class="label">Simplicité</label>
-              <table class="table is-fullwidth text-center table-radio">
-                <tr>
-                  {% for num in range(14) %}
-                    <td><input type="radio" name="simplicite" value="{{ num }}"></td>
-                  {% endfor %}
-                </tr>
-              </table>
-              <table class="table is-fullwidth text-center">
-                <tr>
-                  <td>Simple</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Complexe</td>
-                </tr>
-              </table>
-
-              <!-- taille_groupe -->
-              <label class="label">Pour taille de groupe</label>
-              <table class="table is-fullwidth text-center table-radio">
-                <tr>
-                  {% for num in range(14) %}
-                    <td><input type="radio" name="taille_groupe" value="{{ num }}"></td>
-                  {% endfor %}
-                </tr>
-              </table>
-              <table class="table is-fullwidth text-center">
-                <tr>
-                  <td>4</td>
-                  <td></td>
-                  <td>8</td>
-                  <td></td>
-                  <td>12</td>
-                  <td></td>
-                  <td>20</td>
-                  <td></td>
-                  <td>50</td>
-                  <td></td>
-                  <td>1000</td>
-                  <td></td>
-                  <td>Millions</td>
-                </tr>
-              </table>
-
-              <!-- Adhésion -->
-              <label class="label">Adhésion</label>
-              <table class="table is-fullwidth text-center table-radio">
-                <tr>
-                  {% for num in range(14) %}
-                    <td><input type="radio" name="adhesion" value="{{ num }}"></td>
-                  {% endfor %}
-                </tr>
-              </table>
-              <table class="table is-fullwidth text-center">
-                <tr>
-                  <td>Peu concerné</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Acceptation</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Application</td>
-                </tr>
-              </table>
-
-              <div class="field is-grouped is-grouped-right">
-                <p class="control">
-                  <input class="button is-link" type="submit" value="Rechercher">
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
+{% block body %}
+<section class="section">
+  <div class="container">
+    <h1 class="title is-1 text-center" id="titre">
+        Boîte à outils numérique de la Gouvernance Intégrative
+    </h1>
+    <div class="columns">
+      <div class="column">
+        {% include 'liste_processus.j2' %}
       </div>
-    </section>
 
-  </body>
-</html>
+      <div class="column">
+        {% include 'form_recherche.j2' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

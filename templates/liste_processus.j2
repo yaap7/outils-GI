@@ -1,0 +1,11 @@
+<h2 class="title is-2 text-center" id="titre">
+    Processus
+</h2>
+<p class="subtitle text-center">
+    Voici la liste des processus de prise de décision en groupe
+</p>
+<ul>
+    {% for process in processus %}
+    <li><a href="processus/{{ process['id'] }}">{{ process["titre"]}}</a></li>
+    {% endfor %}
+</ul>

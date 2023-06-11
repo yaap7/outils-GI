@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bulma_0.9.4.min.css') }}">
+    {% block title %}
+      <title>Boîte à outils de la Gouvernance Intégrative</title>
+    {% endblock %}
+    {% block head %}{% endblock %}
+    <style>
+      .text-center {
+        text-align: center;
+      }
+      ol {
+        padding-left: 2rem;
+      }
+      ul {
+        list-style: inside;
+        padding-left: 0.5rem;
+      }
+      .table.table-radio {
+        margin-bottom: 0px;
+      }
+      .table.table-radio td {
+        padding: 0;
+      }
+      .caracteristique {
+        border: 3px lightblue solid;
+        border-radius: 5px;
+        margin: 5px;
+      }
+      .caracteristique-titre {
+        background-color: lightblue;
+        padding: 2px;
+      }
+      .caracteristique-contenu {
+        padding: 2px;
+      }
+      table.legende {
+        font-size: 0.8rem;
+      }
+      @media screen and (max-width: 1215px) {
+        svg.crit {
+          width: 20px;
+        }
+      }
+      @media screen and (min-width: 1216px) {
+        svg.crit {
+          width: 30px;
+        }
+        div#criteres {
+          width: 440px;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+
+    {% block body %}{% endblock %}
+
+  </body>
+</html>

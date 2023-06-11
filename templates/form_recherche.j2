@@ -1,0 +1,68 @@
+<h2 class="title is-2 text-center" id="titre">
+    Recherche
+</h2>
+<p class="subtitle text-center">
+    Vous pouvez aussi faire une recherche par critères
+</p>
+<form action="recherche" method="get">
+    <!-- Rapidité -->
+    <label class="label">Rapidité</label>
+    <table class="table is-fullwidth text-center table-radio">
+    <tr>
+        {% for num in range(14) %}
+        <td><input type="radio" name="rapidite" value="{{ num }}"></td>
+        {% endfor %}
+    </tr>
+    </table>
+    {% include 'legende_rapidite.j2' %}
+
+    <!-- Enjeu -->
+    <label class="label">Pour enjeu</label>
+    <table class="table is-fullwidth text-center table-radio">
+    <tr>
+        {% for num in range(14) %}
+        <td><input type="radio" name="enjeu" value="{{ num }}"></td>
+        {% endfor %}
+    </tr>
+    </table>
+    {% include 'legende_enjeu.j2' %}
+
+    <!-- Simplicité -->
+    <label class="label">Simplicité</label>
+    <table class="table is-fullwidth text-center table-radio">
+    <tr>
+        {% for num in range(14) %}
+        <td><input type="radio" name="simplicite" value="{{ num }}"></td>
+        {% endfor %}
+    </tr>
+    </table>
+    {% include 'legende_simplicite.j2' %}
+
+    <!-- taille_groupe -->
+    <label class="label">Pour taille de groupe</label>
+    <table class="table is-fullwidth text-center table-radio">
+    <tr>
+        {% for num in range(14) %}
+        <td><input type="radio" name="taille_groupe" value="{{ num }}"></td>
+        {% endfor %}
+    </tr>
+    </table>
+    {% include 'legende_taille_groupe.j2' %}
+
+    <!-- Adhésion -->
+    <label class="label">Adhésion</label>
+    <table class="table is-fullwidth text-center table-radio">
+    <tr>
+        {% for num in range(14) %}
+        <td><input type="radio" name="adhesion" value="{{ num }}"></td>
+        {% endfor %}
+    </tr>
+    </table>
+    {% include 'legende_adhesion.j2' %}
+
+    <div class="field is-grouped is-grouped-right">
+    <p class="control">
+        <input class="button is-link" type="submit" value="Rechercher">
+    </p>
+    </div>
+</form>
