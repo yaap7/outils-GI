@@ -11,7 +11,11 @@
       {{ processus['titre'] }}
     </h1>
     <p class="subtitle text-center">
-      Fiche récapitulative de processus de processus
+      {% if processus['id'] % 100 == 0 %}
+        Fiche récapitulative de famille de processus
+      {% else %}
+        Fiche récapitulative de processus de décision
+      {% endif %}
     </p>
     <div id="description">
       {{ processus['description']|safe }}
