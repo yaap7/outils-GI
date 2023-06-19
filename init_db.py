@@ -471,6 +471,47 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion": "22110000000000",
     },
     {
+        "id": 501,
+        "titre": "Règle de trois",
+        "description": """<p><strong>Note importante</strong> : Ce processus a été rajouté par Guillaume G, et n'est pas contenu dans la boîte à outils originale de la Gouvernance Intégrative. Par conséquent, il est possible que les critères listés ici ne soit pas autant objectifs que pour les autres processus, et cette page devrait être soumis à relecture par Sacha. Elle est basé sur la règle de trois défini par la Fresque du Climat et décrite en détails ici : <a href="https://fresqueduclimat.org/projet/association/regle-de-trois/" target="_blank">https://fresqueduclimat.org/projet/association/regle-de-trois/</a>.</p>
+        <p><b>Principe</b> : Le principe de base est que si 3 personnes sont convaincus qu'une initiative est bonne, ils peuvent prendre la décision de la mettre en œuvre (principe de la do-ocratie : ce sont ceux qui font qui décident)</p>
+        <p><b>Processus</b> : Quand une personne a une proposition ou une idée, il en parle à 2 personnes <b>qu’il juge légitimes pour valider la proposition</b>.<br>
+        Les 2 personnes en charge de se positionner peuvent répondre comme suit  :<br>
+        <ul>
+            <li><i>Joker</i> : Je passe mon tour car le sujet ne m’intéresse pas, je n’ai pas d’avis, je n’ai pas le temps, …</li>
+            <li><b>Oui</b> : c'est une bonne idée, je valide → +1 point pour le décompte</li>
+            <li><strong>Non</strong> : je ne valide pas → STOP : l'idée est alors rejeté immédiatement et n'ira pas plus loin avec la règle de trois. Il faudra trouver un autre processus pour la faire valider autrement.</li>
+            <li>Peut-être → 0 point pour le décompte. Il faut alors trouver une autre personne qui puisse légitimement donner son avis sur la question. La personne qui dit « peut-être » peut recommander de consulter une personne en particulier. Dans ce cas, la recommandation doit être suivie.</li>
+        </ul>
+        Au bout de 3 “Oui”, l’idée est adoptée.<br>
+        Au bout de 3 « peut-être » (et pas de non), soit on décide d’abandonner l’idée, soit on réunit les 3 personnes ayant dit « peut-être » pour comparer les arguments. Cela pourra aboutir soit sur une décision, soit sur une nouvelle proposition qui repart à zéro, soit vers le choix d'un autre processus de décision.</p>
+        <p>⚠️ Ce processus doit être cadré (pour les décisions réversible, qui engage un montant maximum de XXX €, …) et la décision doit être communiqué de manière proportionnelle à son niveau d'engagement (qu'elle soit positive ou négative).</p>""",
+        "avantages": """<ul>
+            <li>responsabilise</li>
+            <li>redonne de la liberté d'action</li>
+            <li>créativité individuelle</li>
+            <li>connexion de l'individu à son enthousiasme</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>sujet du ressort de l'individu</li>
+            <li>enjeux faibles</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>individualisme et conflits</li>
+            <li>confusion, chaos</li>
+            <li>moins d'intelligence collective</li>
+            <li>prise en compte des autres modérée</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>son utilisation doit être encadrée pour ne pas donner trop de pouvoirs à un petit groupe</li>
+            <ul>""",
+        "rapidite": "00001122221100",
+        "enjeu": "22221110000000",
+        "simplicite": "11222100000000",
+        "taille_groupe": "22222221111111",
+        "adhesion": "22211100000000",
+    },
+    {
         "id": 600,
         "titre": "Décisions algorithmiques",
         "description": """<p><b>Processus</b> :</p>
