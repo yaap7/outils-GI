@@ -189,7 +189,7 @@ def get_processus(id_processus):
     return "processus introuvable."
 
 
-def get_processus_score(processus, criteres_voulus):
+def get_processus_score(processus, criteres_voulus) -> int:
     """Retourne le score d'un processus par rapport aux critères voulus.
     le processus est l'objet retourné par fetchall() de la DB
     Les criteres_voulus sont de cette forme :
@@ -200,26 +200,66 @@ def get_processus_score(processus, criteres_voulus):
     La valeur pour les critères voulus doit être comprise entre 0 et 13 compris.
 
     Pour chaque critère, le processus gagne les points suivants :
-    - 3 si c'est du vert foncé ;
-    - 1 si c'est du vert clair ;
-    - -1 si c'est du blanc.
+        - 10 si c'est du vert foncé ;
+        - 5 si c'est du vert clair ;
+        - -5 si c'est du blanc.
+    + pour chaque carré adjacent (à 1 de distance) :
+        - 6 si c'est du vert foncé ;
+        - 2 si c'est du vert clair ;
+        - -2 si c'est du blanc ;
+    + pour chaque carré à 2 de distance :
+        - 3 si c'est du vert foncé ;
+        - 1 si c'est du vert clair ;
+        - -1 si c'est du blanc.
+
+    Exemple : je veux une rapidité de 5 :
+
+    00022100000000
+        ^
+    indice voulu
+
+    alors score = 10 + 6 + 2 - 1 - 1 = 16
     """
 
-    def get_affinity(critere_processus, critere_voulu):
-        if critere_processus[critere_voulu] == "0":
-            return -1
-        elif critere_processus[critere_voulu] == "1":
-            return 1
-        elif critere_processus[critere_voulu] == "2":
-            return 3
-        else:
-            return -9000
+    def get_affinity(critere_processus, indice_voulu, adjacent=0) -> int:
+        scoring = {
+            # sur le bon indice (0 de distance)
+            0: {
+                # couleur du carré = score
+                2: 10,
+                1: 5,
+                0: -5,
+            },
+            # à 1 de distance
+            1: {
+                2: 6,
+                1: 2,
+                0: -2,
+            },
+            # à 2 de distance
+            2: {
+                2: 3,
+                1: 1,
+                0: -1,
+            },
+        }
+        return scoring[abs(adjacent)][int(critere_processus[indice_voulu + adjacent])]
 
     score = 0
     for critere_voulu in criteres_voulus:
-        score += get_affinity(
-            processus[critere_voulu], int(criteres_voulus[critere_voulu])
-        )
+        # obtention du score pour la valeur demandée
+        indice_voulu = int(criteres_voulus[critere_voulu])
+        score += get_affinity(processus[critere_voulu], indice_voulu)
+        # évolution du score grâce aux valeurs adjacentes (à 1 de distance)
+        if indice_voulu > 0:
+            score += get_affinity(processus[critere_voulu], indice_voulu, -1)
+        if indice_voulu < 13:
+            score += get_affinity(processus[critere_voulu], indice_voulu, 1)
+        # évolution du score grâce aux valeurs adjacentes (à 2 de distance)
+        if indice_voulu > 1:
+            score += get_affinity(processus[critere_voulu], indice_voulu, -2)
+        if indice_voulu < 12:
+            score += get_affinity(processus[critere_voulu], indice_voulu, 2)
     return score
 
 
@@ -240,7 +280,32 @@ def get_recherche():
         score_processus.items(), key=lambda x: x[1], reverse=True
     ):
         processus_triees.append((processus, score))
+    # détermination du gagnant
+    meilleur_score = processus_triees[0][1]
+    if meilleur_score <= 0:
+        return render_template("template_TODO")
+    p_gagnant = processus_triees[0]
+    # détermination des autres process
+    p_pertinents = []
+    # 1. les processus pertinents sont ceux qui ont au moins
+    # un score supérieur ou égal à 80% du meilleur score
+    p_autres = []
+    # 2. les autres processus sont ceux qui ont un score positif
+    # mais inférieur à 80% du meilleur score
+    p_deconseille = []
+    # 3. enfin, le reste est négatif ou égal à 0 et n'est pas recommandé
+    for processus in processus_triees[1:]:
+        if processus[1] <= 0:
+            p_deconseille.append(processus)
+        elif processus[1] < float(meilleur_score) * 0.8:
+            p_autres.append(processus)
+        else:
+            p_pertinents.append(processus)
+
     return render_template(
         "recherche.html",
-        processus_triees=processus_triees,
+        p_gagnant=p_gagnant,
+        p_pertinents=p_pertinents,
+        p_autres=p_autres,
+        p_deconseille=p_deconseille,
     )
