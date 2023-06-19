@@ -4,7 +4,7 @@
 <p class="subtitle text-center">
     Voici la liste des processus de prise de décision en groupe, classé par famille
 </p>
-<ul>
+<ul id="liste-familles">
     {% for famille in processus_par_famille.keys() %}
     <li>
         <a href="processus/{{ famille['id'] }}">{{ famille["titre"]}}</a>
