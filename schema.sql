@@ -10,7 +10,9 @@ CREATE TABLE processus (
     -- car ce sont de simples listes
     avantages TEXT,
     adapte TEXT,
+    risques TEXT,
     inconvenients TEXT,
+    deconseille TEXT,
     points_cles TEXT,
     -- critères :
     -- ils sont au format de 14 caractères

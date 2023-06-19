@@ -49,9 +49,19 @@ caracteristiques = [
         "couleur": "lightblue",
     },
     {
+        "id": "risques",
+        "nom": "Risques",
+        "couleur": "#fce1bb",
+    },
+    {
         "id": "inconvenients",
         "nom": "Inconvénients",
         "couleur": "lightcoral",
+    },
+    {
+        "id": "deconseille",
+        "nom": "Déconseillé",
+        "couleur": "#ff9259",
     },
     {
         "id": "points_cles",
