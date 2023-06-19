@@ -87,7 +87,7 @@ def get_db_connection():
     return conn
 
 
-def retourne_un_processus(id_processus):
+def retourne_un_processus(id_processus) -> dict:
     """Retourne uniquement un processus.
     Prend l'ID du processus en argument.
     Renvoie un dictionnaire"""
@@ -101,7 +101,33 @@ def retourne_un_processus(id_processus):
     return result
 
 
-def retourne_tous_les_processus():
+def retourne_toutes_les_familles() -> list:
+    """Retourne tous les processus de la base de données.
+    Renvoie une liste de dictionnaire."""
+    conn = get_db_connection()
+    req_select = """SELECT *
+    FROM processus
+    WHERE id % 100 = 0"""
+    result = conn.execute(req_select).fetchall()
+    conn.close()
+    return result
+
+
+def retourne_tous_les_processus_dune_famille(id_famille) -> list:
+    """Retourne tous les processus de la base de données.
+    Renvoie une liste de dictionnaire."""
+    conn = get_db_connection()
+    req_select = """SELECT *
+    FROM processus
+    WHERE id > ?
+    AND id < ?"""
+    parameters = [id_famille, id_famille + 100]
+    result = conn.execute(req_select, parameters).fetchall()
+    conn.close()
+    return result
+
+
+def retourne_tous_les_processus() -> list:
     """Retourne tous les processus de la base de données.
     Renvoie une liste de dictionnaire."""
     conn = get_db_connection()
@@ -112,15 +138,29 @@ def retourne_tous_les_processus():
     return result
 
 
+def retourne_les_processus_par_famille() -> dict:
+    """Retourne tous les processus par famille, classé dans un dictionnaire :
+    {
+        <famille 100>: [<processus 101>, <processus 102>, ...],
+        <famille 200>: [],
+        ...
+    }
+    """
+    retour = {}
+    for famille in retourne_toutes_les_familles():
+        retour[famille] = retourne_tous_les_processus_dune_famille(famille["id"])
+    return retour
+
+
 @app.route("/")
 @app.route("/index/")
 @app.route("/index.html")
 def index():
     """Renvoie la page d'accueil"""
-    processus = retourne_tous_les_processus()
+    processus_par_famille = retourne_les_processus_par_famille()
     return render_template(
         "index.html",
-        processus=processus,
+        processus_par_famille=processus_par_famille,
     )
 
 

@@ -13,6 +13,22 @@ Page 8 : dans ne => dans une
 Page 10 : pareil
 """
 
+explications = """
+Je crois que j'ai décidé de la chose suivante pour classer les familles de processus VS les processus :
+id = x00 => c'est une famille de processus ;
+id = xyy où yy > 0 => c'est un processus qui appartient à la famille x00.
+
+ça permet d'écrire les requêtes suivantes pour trouver les familles :
+``` sql
+select id, titre from processus where id % 100 = 0
+```
+
+et ça pour trouver les processus :
+``` sql
+select id, titre from processus where id % 100 != 0
+```
+"""
+
 processus = [
     {
         "id": 100,
