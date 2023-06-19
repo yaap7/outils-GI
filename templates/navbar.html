@@ -1,7 +1,15 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/">
-      Accueil
+      <img src="{{ url_for('static', filename='img/GI_logo.webp') }}" alt="Logo de la Gouvernance Integrative" width="220" height="92">
     </a>
+  </div>
+
+  <div class="navbar-menu">
+    <div class="navbar-start">
+      <a class="navbar-item" href="/">
+        Accueil
+      </a>
+    </div>
   </div>
 </nav>
