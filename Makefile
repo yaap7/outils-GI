@@ -1,3 +1,7 @@
+init_db:
+	sqlite3 database.db < schema.sql
+	python3 ./init_db.py
+
 format:
 	black .
 
