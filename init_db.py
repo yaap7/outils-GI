@@ -139,6 +139,33 @@ processus = [
     },
     {
         "id": 200,
+        "titre": "Votes binaires",
+        "description": """TODO""",
+        "avantages": """<ul>
+            <li>plutôt rapide</li>
+            <li>équité dans le vote</li>
+            <li>possible à distance</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>sujet binaire</li>
+            </ul>""",
+        "inconvenients": """<ul>
+            <li>clivant</li>
+            <li>faible intelligence collective</li>
+            <li>pas de prise en compte de la minorité</li>
+            <li>non application de la décision par la minorité</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>La personne qui formule la proposition a un pouvoir énorme, risque de manipulation.</li>
+            </ul>""",
+        "rapidite": "00000001210000",
+        "enjeu": "00011122221100",
+        "simplicite": "22100000000000",
+        "taille_groupe": "01222222222222",
+        "adhesion": "00011222211000",
+    },
+    {
+        "id": 201,
         "titre": "Vote à la majorité",
         "description": """<b>Processus</b>, en réunion :
             <ol>
@@ -286,6 +313,40 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion": "00000011222211",
     },
     # TODO : to be continued at "Processus de décision horizontaux - égalitaires"
+    {
+        "id": 400,
+        "titre": "Processus de décision horizontaux - égalitaires",
+        "description": """<p>L’objectif est de prendre le temps de s’écouter et de construire une proposition commune afin de prendre des décisions qui conviennent à tous les membres de l’organisation.</p>
+            <p><b>Liste de processus</b> : Consentement, consentement à proposition multiples, unanimité, consensus, consensus informel, consensus-n, …</p>""",
+        "avantages": """<ul>
+            <li>grande adhésion</li>
+            <li>forte intelligence collective</li>
+            <li>respect de chacun⋅e</li>
+            <li>nourrit le lien</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>décision demandant peu d'actions des autres</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>inertie, paralysie</li>
+            <li>épuisement</li>
+            <li>décision « molle »</li>
+            <li>pression sur les individus pour être au niveau</li>
+            </ul>""",
+        "deconseille": """<ul>
+            <li>les sujets urgents</li>
+            <li>quand des avis irréconciliables coexistent</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>Nécessite une posture coopérative des participants</li>
+            <li>Nécessite un objectif commun</li>
+            </ul>""",
+        "rapidite": "11111222110000",
+        "enjeu": "00011112222222",
+        "simplicite": "01111111111111",
+        "taille_groupe": "22222111100000",
+        "adhesion": "00001122222222",
+    },
     {
         "id": 888,
         "titre": "",
