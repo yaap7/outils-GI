@@ -13,6 +13,11 @@ cur = connection.cursor()
 corrections = """
 Page 8 : dans ne => dans une
 Page 10 : pareil
+Page 34 : Tour de bonifications des objections => Bonification ou retrait de la proposition
+Page 36 aussi.
+Page 39 : fiche récap de processus => fiche récap de famille de processus
+Page 44 : à source de sagesse => à une source de sagesse
+Page 47 : probablement pas le bon contenu
 """
 
 explications = """
@@ -312,7 +317,6 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "taille_groupe": "22222110000000",
         "adhesion": "00000011222211",
     },
-    # TODO : to be continued at "Processus de décision horizontaux - égalitaires"
     {
         "id": 400,
         "titre": "Processus de décision horizontaux - égalitaires",
@@ -338,8 +342,8 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>quand des avis irréconciliables coexistent</li>
             </ul>""",
         "points_cles": """<ul>
-            <li>Nécessite une posture coopérative des participants</li>
-            <li>Nécessite un objectif commun</li>
+            <li>nécessite une posture coopérative des participants</li>
+            <li>nécessite un objectif commun</li>
             </ul>""",
         "rapidite": "11111222110000",
         "enjeu": "00011112222222",
@@ -348,29 +352,220 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion": "00001122222222",
     },
     {
-        "id": 888,
-        "titre": "",
-        "description": """""",
+        "id": 401,
+        "titre": "Consensus",
+        "description": """<p>Il existe de nombreuses variantes du consensus, en voilà une.</p>
+            <p><b>Processus</b> :
+            <ol>
+                <li>Tour de clarification du sujet, partage des faits</li>
+                <li>Tour de parole pour faire émerger les besoins et l’intelligence collective</li>
+                <li>Une personne / un sous-groupe fait une proposition</li>
+                <li>Tour de ressenti sur la proposition</li>
+                <li>Le proposeur peut modifier sa proposition</li>
+                <li>Tour de positionnement : soutenir, s’opposer ou s’abstenir</li>
+                <li>La proposition est validée s’il n’y a pas d’opposition et moins de x% d’abstention.</li>
+            </ol></p>""",
         "avantages": """<ul>
-            <li></li>
+            <li>grande adhésion</li>
+            <li>forte intelligence collective</li>
+            <li>respect de chacun⋅e</li>
+            <li>nourrit le lien</li>
             </ul>""",
         "adapte": """<ul>
-            <li></li>
+            <li>sujet irréversible</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>inertie, paralysie</li>
+            <li>épuisement</li>
+            <li>décision « molle »</li>
+            <li>pression sur les individus pour avoir la bonne posture</li>
+            </ul>""",
+        "deconseille": """<ul>
+            <li>les sujets urgents</li>
+            <li>quand des avis irréconciliables coexistent</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>nécessite une posture coopérative des participants</li>
+            <li>nécessite un objectif commun, un bon facilitateur</li>
+            </ul>""",
+        "rapidite": "01111222110000",
+        "enjeu": "00000001112222",
+        "simplicite": "01122110000000",
+        "taille_groupe": "22211100000000",
+        "adhesion": "00000001112222",
+    },
+    {
+        "id": 402,
+        "titre": "Consentement",
+        "description": """<p><b>Processus</b>, en réunion :
+            <ol>
+                <li>Tour de clarification du sujet, partage des faits</li>
+                <li>Écoute du centre pour faire émerger les besoins et l’intelligence collective</li>
+                <li>Une personne / un sous-groupe fait une proposition</li>
+                <li>Tour de clarification de la proposition</li>
+                <li>Tour de ressenti sur la proposition</li>
+                <li>Amendement : Le proposeur peut modifier sa proposition</li>
+                <li>Tour d'objections</li>
+                <li>Pour chaque objection :<ul>
+                    <li>Test de l'objection</li>
+                    <li>Bonification ou retrait de la proposition par le proposeur</li>
+                </ul></li>
+                <li>La proposition est validée lorsqu'il n'y a plus d'objections.</li>
+            </ol></p>""",
+        "avantages": """<ul>
+            <li>bonne adhésion</li>
+            <li>forte intelligence collective</li>
+            <li>respect de chacun⋅e</li>
+            <li>nourrit le lien</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>sujet irréversible</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>inertie, paralysie</li>
+            <li>épuisement</li>
+            <li>décision « molle »</li>
+            <li>pression sur les individus pour avoir la bonne posture</li>
+            </ul>""",
+        "deconseille": """<ul>
+            <li>les sujets urgents</li>
+            <li>quand des avis irréconciliables coexistent</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>nécessite formation et posture coopérative des participants</li>
+            <li>nécessite un objectif commun, un excellent facilitateur</li>
+            </ul>""",
+        "rapidite": "01111222110000",
+        "enjeu": "00000001112222",
+        "simplicite": "00000000122210",
+        "taille_groupe": "22211100000000",
+        "adhesion": "00000001112222",
+    },
+    {
+        "id": 500,
+        "titre": "Mode de décisions libertaires",
+        "description": """<p>Chacun·e est libre de prendre sa propre décision ou des initiatives. Cela peut être sur un sujet précis ou être un mode de fonctionnement permanent de l’organisation (autogestion, do-ocratie, stigmergie, …).</p>
+            <p>Il n’y a pas de processus, il peut ou pas y avoir des échanges.</p>
+            <p>Même si ce n’est pas un fonctionnement légitimé dans l’organisation. La liberté et les initiatives individuelles existeront forcément de manière informelle.</p>""",
+        "avantages": """<ul>
+            <li>extrêmement économe en énergie, quasi instantané</li>
+            <li>créativité individuelle</li>
+            <li>connexion de l'individu à son enthousiasme</li>
+            <li>possible sans être réunis</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>décision urgente sans besoin de coordination</li>
+            <li>sujet du ressort de l'individu</li>
+            <li>enjeux faibles</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>individualisme et conflits</li>
+            <li>confusion, chaos</li>
+            <li>pas d'intelligence collective</li>
+            <li>prise en compte des autres faible ou aléatoire</li>
+            </ul>""",
+        "rapidite": "00000000011222",
+        "enjeu": "22221110000000",
+        "simplicite": "22100000000000",
+        "taille_groupe": "22222221111111",
+        "adhesion": "22110000000000",
+    },
+    {
+        "id": 600,
+        "titre": "Décisions algorithmiques",
+        "description": """<p><b>Processus</b> :</p>
+            <ol>
+                <li>Échanger sur le sujet</li>
+                <li>Créer un « algorithme » pertinent (une formule)</li>
+                <li>Chacun⋅e donne sa réponse</li>
+                <li>Les réponses sont compilées grâce à l'algorithme, cela donne la décision</li>
+            </ol>
+            <p>Exemple : quel budget consacrons-nous à cet événement ?<br>
+                => Faire la moyenne des réponses de chacun⋅e</p>""",
+        "avantages": """<ul>
+            <li>équitable, impartial</li>
+            <li>possible à distance</li>
+            <li>extrêmement rapide une fois l'algorithme validé</li>
+            <li>facile de remodifier la décision</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>limité à des critères mesurables et objectifs</li>
             </ul>""",
         "inconvenients": """<ul>
-            <li></li>
+            <li>très rationnel et froid : pas de place pour l'émotionnel, la créativité, le lien, les cas particuliers</li>
+            <li>peut être sensible aux manipulations</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>le pouvoir le plus important se situe dans le choix de l'algorithme</li>
+            </ul>""",
+        "rapidite": "00000011221100",
+        "enjeu": "00111122222110",
+        "simplicite": "11222111111111",
+        "taille_groupe": "01222222222222",
+        "adhesion": "00111222222111",
+    },
+    {
+        "id": 700,
+        "titre": "Hasard",
+        "description": """<p><b>Processus</b> : La décision est prise suivant le résultat d’un test au résultat aléatoire, non sujet à interprétation.<br>
+            Tirage à la courte paille, au dés, pile ou face, …</p>""",
+        "avantages": """<ul>
+            <li>impartialité totale</li>
+            <li>possible à distance</li>
+            <li>très économe en énergie</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>quand les possibilités sont bien identifiées et équivalentes</li>
+            <li>quand le mental est dépassé</li>
+            <li>pour départager en cas d'égalité</li>
+            <li>pour attribuer des rôles avec une excellente représentativité</li>
+            </ul>""",
+        "inconvenients": """<ul>
+            <li>déresponsabilisation</li>
+            <li>peu de réflexion</li>
+            <li>créativité limitée</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>le véritable pouvoir est celui de déterminer les différentes options</li>
+            </ul>""",
+        "rapidite": "00000000011222",
+        "enjeu": "22211000000000",
+        "simplicite": "22110000000000",
+        "taille_groupe": "22222222222222",
+        "adhesion": "11111111111111",
+    },
+    {
+        "id": 800,
+        "titre": "Suivre un signe",
+        "description": """<p>Décider en fonction de l’interprétation de signes (tirage de cartes, synchronicité, divination, astrologie, ressenti énergétique, pendule, …)<br>
+            L’interprétation du signe peut être lié, à une personne dont la compétence est reconnue (chaman, astrologue, …) ou à une « règle » (Si le pendule tourne dans tel sens alors …).<br>
+            Est souvent utilisé à titre individuel (ce qui n’est pas notre sujet).<br>
+            A été très utilisé pendant des millénaires.</p>""",
+        "avantages": """<ul>
+            <li>souvent rapide</li>
+            <li>économe en énergie (intuitif plutôt que mental)</li>
+            <li>se sentir guidé ou connecté à une source de sagesse supérieure</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>uniquement aux groupes avec croyances communes</li>
+            <li>quand le mental est dépassé</li>
+            </ul>""",
+        "inconvenients": """<ul>
+            <li>prise de pouvoir de la personne qui interprète</li>
+            <li>déresponsabilisation</li>
+            <li>pas ou peu d'intelligence collective</li>
             </ul>""",
         "points_cles": """<ul>
             <li></li>
             </ul>""",
-        "rapidite": "00112221000000",
-        "enjeu": "01222100000000",
-        "simplicite": "22100000000000",
-        "taille_groupe": "22222211100000",
-        "adhesion": "12211000000000",
+        "rapidite": "11111112222222",
+        "enjeu": "11111111111111",
+        "simplicite": "00011111111111",
+        "taille_groupe": "11111111111111",
+        "adhesion": "00000000111111",
     },
     {
-        "id": 999,  # TODO change this ID
+        "id": 900,
         "titre": "Tradition, habitudes",
         "description": """<b>Processus</b><br>
             Cela peut être un choix conscient : « on fait comme d’habitude ». Mais la plupart du temps c’est une manière inconsciente de ne pas (re)prendre une décision.""",
@@ -396,6 +591,37 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "enjeu": "22222222222111",
         "simplicite": "22110000000000",
         "taille_groupe": "22222222222222",
+        "adhesion": "11111111111111",
+    },
+    {
+        "id": 1000,
+        "titre": "Non-choix",
+        "description": """<p>Ne pas prendre de décision. Il peut y avoir une multitude de raisons :</p>
+            <ul>
+                <li>reporter la décision</li>
+                <li>rejeter le thème (hors-sujet ou dépendant d’une autre instance)</li>
+                <li>oubli</li>
+                <li>accepter l’issue naturelle</li>
+                <li>incapacité à se réunir</li>
+                <li>incapacité à se mettre d’accord</li>
+                <li>…</li>
+            </ul>
+            <p>Une distinction majeure est de savoir si cette absence de décision est subie (ce qui est douloureux) ou choisie…</p>""",
+        "avantages": """<ul>
+            <li>économie d'énergie</li>
+            <li>prendre le temps</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>frustrations</li>
+            <li>inertie</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li></li>
+            </ul>""",
+        "rapidite": "11111111111111",
+        "enjeu": "11111111111111",
+        "simplicite": "11100000000000",
+        "taille_groupe": "11111111111111",
         "adhesion": "11111111111111",
     },
 ]
