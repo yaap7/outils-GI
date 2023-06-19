@@ -485,9 +485,9 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         </ul>
         Au bout de 3 “Oui”, l’idée est adoptée.<br>
         Au bout de 3 « peut-être » (et pas de non), soit on décide d’abandonner l’idée, soit on réunit les 3 personnes ayant dit « peut-être » pour comparer les arguments. Cela pourra aboutir soit sur une décision, soit sur une nouvelle proposition qui repart à zéro, soit vers le choix d'un autre processus de décision.</p>
-        <p>⚠️ Ce processus doit être cadré (pour les décisions réversible, qui engage un montant maximum de XXX €, …) et la décision doit être communiqué de manière proportionnelle à son niveau d'engagement (qu'elle soit positive ou négative).</p>""",
+        <p>⚠️ Ce processus doit être cadré (à utiliser uniquement pour les décisions réversibles, ou bien qui engage un montant maximum de XXX €, …) et la décision doit être communiqué de manière proportionnelle à son niveau d'engagement (qu'elle soit positive ou négative).</p>""",
         "avantages": """<ul>
-            <li>responsabilise</li>
+            <li>responsabilise les individus</li>
             <li>redonne de la liberté d'action</li>
             <li>créativité individuelle</li>
             <li>connexion de l'individu à son enthousiasme</li>
@@ -503,7 +503,7 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>prise en compte des autres modérée</li>
             </ul>""",
         "points_cles": """<ul>
-            <li>son utilisation doit être encadrée pour ne pas donner trop de pouvoirs à un petit groupe</li>
+            <li>son utilisation doit être encadrée pour ne pas donner trop de pouvoir à un petit groupe</li>
             <ul>""",
         "rapidite": "00001122221100",
         "enjeu": "22221110000000",
