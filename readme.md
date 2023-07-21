@@ -20,7 +20,9 @@ make dev_server
 
 ## Todolist
 
-* [ ] Insérer la licence et la paternité sur toutes les pages (bas de page).
-* [ ] Intégrer les autres processus.
-* [ ] Faire une page de résultat de recherche plus parlante, avec des médailles et/ou un tableau.
+* [ ] Trouver une solution pour que tout le monde puisse ajouter des processus.
+* [ ] Réfléchir à rajouter des processus d'élection.
+* [x] Insérer la licence et la paternité sur toutes les pages (bas de page).
+* [x] Intégrer les autres processus.
+* [x] Faire une page de résultat de recherche plus parlante, avec des médailles et/ou un tableau.
 * [x] faire une première fonction de recherche basique.
