@@ -319,9 +319,15 @@ def get_recherche_mots_cles():
                 score += 10
             if processus["avantages"] is not None and mot_cle in processus["avantages"]:
                 score += 10
-            if processus["points_cles"] is not None  and mot_cle in processus["points_cles"]:
+            if (
+                processus["points_cles"] is not None
+                and mot_cle in processus["points_cles"]
+            ):
                 score += 2
-            if processus["description"] is not None  and mot_cle in processus["description"]:
+            if (
+                processus["description"] is not None
+                and mot_cle in processus["description"]
+            ):
                 score += 1
         score_processus[processus] = score
         print(f"mon score final = {score}")
