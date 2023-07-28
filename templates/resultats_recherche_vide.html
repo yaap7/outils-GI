@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+<meta name="description" content="Résultat de recherche de processus de décision.">
+{% endblock %}
+
+{% block body %}
+  <section class="section">
+    <div class="container">
+
+      <h1 class="title is-1 text-center" id="titre">
+        Aucun résultat
+      </h1>
+      <div>
+        <p>Votre recherche n'a renvoyé aucun résultat.</p>
+        <p>
+          Si vous avez fait une recherche par mots-clés, vous pouvez essayer de choisir des mots plus précis et représentant ce que vous cherchez.
+          Par exemple, les mots "rapidité", ou "adhésion".
+          Il est possible de mettre plusieurs mots séparés par des espaces.
+        </p>
+      </div>
+
+    </div>
+  </section>
+{% endblock %}

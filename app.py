@@ -189,7 +189,7 @@ def get_processus(id_processus):
     return "processus introuvable."
 
 
-def get_processus_score(processus, criteres_voulus) -> int:
+def get_processus_score_criteres(processus, criteres_voulus) -> int:
     """Retourne le score d'un processus par rapport aux critères voulus.
     le processus est l'objet retourné par fetchall() de la DB
     Les criteres_voulus sont de cette forme :
@@ -263,9 +263,25 @@ def get_processus_score(processus, criteres_voulus) -> int:
     return score
 
 
-@app.route("/recherche")
-def get_recherche():
-    """Fonction de recherche. à améliorer."""
+def get_processus_score_mots_cles(processus, mots_cles):
+    score = 0
+    for mot_cle in mots_cles:
+        if mot_cle in processus["titre"]:
+            score += 50
+        if mot_cle in processus["adapte"]:
+            score += 10
+        if mot_cle in processus["avantages"]:
+            score += 10
+        if mot_cle in processus["points_cles"]:
+            score += 2
+        if mot_cle in processus["description"]:
+            score += 1
+    return score
+
+
+@app.route("/recherche_criteres")
+def get_recherche_criteres():
+    """Fonction de recherche par critères."""
     id_criteres = [i["id"] for i in criteres]
     criteres_voulus = {}
     for id_critere in id_criteres:
@@ -273,8 +289,47 @@ def get_recherche():
             criteres_voulus[id_critere] = request.args.get(id_critere)
     score_processus = {}
     for processus in retourne_tous_les_processus():
-        score = get_processus_score(processus, criteres_voulus)
+        score = get_processus_score_criteres(processus, criteres_voulus)
         score_processus[processus] = score
+    return tri_et_retourne_resultats(score_processus)
+
+
+@app.route("/recherche_mots-cles")
+def get_recherche_mots_cles():
+    """Fonction de recherche par mots clés."""
+    if (
+        "mots-cles" not in request.args
+        or request.args["mots-cles"] is None
+        or request.args["mots-cles"] == ""
+    ):
+        return render_template(
+            "resultats_recherche_mots-cles.html",
+            args="rien reçu !",
+        )
+    mots_cles = request.args["mots-cles"].split(" ")
+    score_processus = {}
+    for processus in retourne_tous_les_processus():
+        score = 0
+        for mot_cle in mots_cles:
+            print(f"je cherche le mot clé {mot_cle}.")
+            print(f"le titre = {processus['titre']}.")
+            if processus["titre"] is not None and mot_cle in processus["titre"]:
+                score += 50
+            if processus["adapte"] is not None and mot_cle in processus["adapte"]:
+                score += 10
+            if processus["avantages"] is not None and mot_cle in processus["avantages"]:
+                score += 10
+            if processus["points_cles"] is not None  and mot_cle in processus["points_cles"]:
+                score += 2
+            if processus["description"] is not None  and mot_cle in processus["description"]:
+                score += 1
+        score_processus[processus] = score
+        print(f"mon score final = {score}")
+    return tri_et_retourne_resultats(score_processus)
+
+
+def tri_et_retourne_resultats(score_processus):
+    """Fonction qui trie les processus par score et renvoie la page de résultat de la recherche."""
     processus_triees = []
     for processus, score in sorted(
         score_processus.items(), key=lambda x: x[1], reverse=True
@@ -282,8 +337,11 @@ def get_recherche():
         processus_triees.append((processus, score))
     # détermination du gagnant
     meilleur_score = processus_triees[0][1]
+    print("=====================")
+    print(f"processus_triees = {processus_triees}")
+    print("=====================")
     if meilleur_score <= 0:
-        return render_template("template_TODO")
+        return render_template("resultats_recherche_vide.html")
     p_gagnant = processus_triees[0]
     # détermination des autres process
     p_pertinents = []
@@ -303,7 +361,7 @@ def get_recherche():
             p_pertinents.append(processus)
 
     return render_template(
-        "recherche.html",
+        "resultats_recherche.html",
         p_gagnant=p_gagnant,
         p_pertinents=p_pertinents,
         p_autres=p_autres,

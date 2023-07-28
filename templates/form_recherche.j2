@@ -1,10 +1,12 @@
 <h2 class="title is-2 text-center" id="titre">
     Recherche
 </h2>
+
+
 <p class="subtitle text-center">
     Vous pouvez aussi faire une recherche par critères
 </p>
-<form action="recherche" method="get">
+<form action="recherche_criteres" method="get">
     <!-- Rapidité -->
     <label class="label">Rapidité</label>
     <table class="table is-fullwidth text-center table-radio">
@@ -62,7 +64,25 @@
 
     <div class="field is-grouped is-grouped-right">
     <p class="control">
-        <input class="button is-link" type="submit" value="Rechercher">
+        <input class="button is-link" type="submit" value="Rechercher par critères">
+    </p>
+    </div>
+</form>
+
+<hr>
+
+
+<p class="subtitle text-center">
+    Il est aussi possible de faire une recherche par mots-clés
+</p>
+<form action="recherche_mots-cles" method="get">
+    <!-- Rapidité -->
+    <label class="mots-cles">Mots-clés : </label>
+    <input id="input_mots-cles" type="text" name="mots-cles">
+
+    <div class="field is-grouped is-grouped-right">
+    <p class="control">
+        <input class="button is-link" type="submit" value="Rechercher par mots-clés">
     </p>
     </div>
 </form>
