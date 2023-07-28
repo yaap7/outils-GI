@@ -442,6 +442,60 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "adhesion": "00000001112222",
     },
     {
+        "id": 420,
+        "titre": "Gestion par objection avec contrainte de temps",
+        "description": """<p><strong>Note importante</strong> : Ce processus a été rajouté par Guillaume G, et n'est pas contenu dans la boîte à outils originale de la Gouvernance Intégrative. Par conséquent, il est possible que les critères listés ici ne soit pas autant objectifs que pour les autres processus, et cette page devrait être soumis à relecture par Sacha. Elle est issue d'un exercice pour apprendre à créer des processus hybrides.<br>
+        L'idée principale est de définir un choix qui sera validé automatiquement après un certain temps dans le cas ou le processus de Gestion Par Objection (encore souvent appelé Gestion Par Consentement, ou GPC) traine en longueur et ne permet pas de valider une proposition avant un certain temps. Ce processus est tout indiqué dans des situations où les contraintes extérieures force l'organisation à faire un choix avant une certaine date (élections, achat/vente de bien immobilier, échéance d'un prêt immobilier, etc.). Ce processus est assez complexe, et il convient d'être déjà à l'aise avec la Gestion Par Objection pour être pleinement utilisé.
+        <br>
+        <span style="color: red">TODO à terminer</span>
+        <br>
+        Gestion Par Objection habituelle :
+            <ol>
+                <li>Tour de clarification du sujet, partage des faits</li>
+                <li>Écoute du centre pour faire émerger les besoins et l’intelligence collective</li>
+                <li>Une personne / un sous-groupe fait une proposition</li>
+                <li>Tour de clarification de la proposition</li>
+                <li>Tour de ressenti sur la proposition</li>
+                <li>Amendement : Le proposeur peut modifier sa proposition</li>
+                <li>Tour d'objections</li>
+                <li>Pour chaque objection :<ul>
+                    <li>Test de l'objection</li>
+                    <li>Bonification ou retrait de la proposition par le proposeur</li>
+                </ul></li>
+                <li>La proposition est validée lorsqu'il n'y a plus d'objections.</li>
+            </ol></p>""",
+        "avantages": """<ul>
+            <li>permet de finir avec une décision</li>
+            <li>forte intelligence collective</li>
+            <li>respect de chacun⋅e</li>
+            <li>nourrit le lien</li>
+            </ul>""",
+        "adapte": """<ul>
+            <li>les sujets urgents</li>
+            <li>sujet irréversible</li>
+            </ul>""",
+        "risques": """<ul>
+            <li>paralysie</li>
+            <li>épuisement</li>
+            <li>"force" le consentement → adhésion aléatoire</li>
+            <li>pression sur les individus pour avoir la bonne posture</li>
+            </ul>""",
+        "deconseille": """<ul>
+            <li>quand des avis irréconciliables coexistent</li>
+            </ul>""",
+        "points_cles": """<ul>
+            <li>nécessite un minimum de confiance dans le groupe</li>
+            <li>nécessite formation et posture coopérative des participants</li>
+            <li>nécessite un objectif commun</li>
+            <li>>un excellent facilitateur</li>
+            </ul>""",
+        "rapidite": "22222211000000",
+        "enjeu": "00000001112222",
+        "simplicite": "00000000111222",
+        "taille_groupe": "22211100000000",
+        "adhesion": "00000001112222",
+    },
+    {
         "id": 500,
         "titre": "Mode de décisions libertaires",
         "description": """<p>Chacun·e est libre de prendre sa propre décision ou des initiatives. Cela peut être sur un sujet précis ou être un mode de fonctionnement permanent de l’organisation (autogestion, do-ocratie, stigmergie, …).</p>
