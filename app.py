@@ -1,6 +1,3 @@
-# source de l'exercice :
-# https://www.digitalocean.com/community/tutorials/how-to-create-your-first-web-application-using-flask-and-python-3
-
 import sqlite3
 from os import path
 from flask import Flask
@@ -10,8 +7,12 @@ from flask import request
 PROJECT_ROOT = path.dirname(path.realpath(__file__))
 DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
 
-app = Flask(__name__)
+__VERSION__ = "1.0"
+base_info = {
+    "version": __VERSION__,
+}
 
+app = Flask(__name__)
 
 # La liste des critères avec leur nom interne et leur nom d'affichage
 criteres = [
@@ -170,6 +171,7 @@ def index():
     processus_par_famille = retourne_les_processus_par_famille()
     return render_template(
         "index.html",
+        base_info=base_info,
         processus_par_famille=processus_par_famille,
     )
 
@@ -182,6 +184,7 @@ def get_processus(id_processus):
         processus = result[0]
         return render_template(
             "processus.html",
+            base_info=base_info,
             processus=processus,
             caracteristiques=caracteristiques,
             criteres=criteres,
@@ -304,6 +307,7 @@ def get_recherche_mots_cles():
     ):
         return render_template(
             "resultats_recherche_mots-cles.html",
+            base_info=base_info,
             args="rien reçu !",
         )
     mots_cles = request.args["mots-cles"].split(" ")
@@ -311,8 +315,6 @@ def get_recherche_mots_cles():
     for processus in retourne_tous_les_processus():
         score = 0
         for mot_cle in mots_cles:
-            print(f"je cherche le mot clé {mot_cle}.")
-            print(f"le titre = {processus['titre']}.")
             if processus["titre"] is not None and mot_cle in processus["titre"]:
                 score += 50
             if processus["adapte"] is not None and mot_cle in processus["adapte"]:
@@ -330,7 +332,6 @@ def get_recherche_mots_cles():
             ):
                 score += 1
         score_processus[processus] = score
-        print(f"mon score final = {score}")
     return tri_et_retourne_resultats(score_processus)
 
 
@@ -343,11 +344,11 @@ def tri_et_retourne_resultats(score_processus):
         processus_triees.append((processus, score))
     # détermination du gagnant
     meilleur_score = processus_triees[0][1]
-    print("=====================")
-    print(f"processus_triees = {processus_triees}")
-    print("=====================")
     if meilleur_score <= 0:
-        return render_template("resultats_recherche_vide.html")
+        return render_template(
+            "resultats_recherche_vide.html",
+            base_info=base_info,
+        )
     p_gagnant = processus_triees[0]
     # détermination des autres process
     p_pertinents = []

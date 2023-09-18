@@ -650,9 +650,6 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
             <li>déresponsabilisation</li>
             <li>pas ou peu d'intelligence collective</li>
             </ul>""",
-        "points_cles": """<ul>
-            <li></li>
-            </ul>""",
         "rapidite": "11111112222222",
         "enjeu": "11111111111111",
         "simplicite": "00011111111111",
@@ -709,9 +706,6 @@ Le processus de consultation peut être informel, souvent oral ou formalisé et 
         "risques": """<ul>
             <li>frustrations</li>
             <li>inertie</li>
-            </ul>""",
-        "points_cles": """<ul>
-            <li></li>
             </ul>""",
         "rapidite": "11111111111111",
         "enjeu": "11111111111111",
