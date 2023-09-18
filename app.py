@@ -369,6 +369,7 @@ def tri_et_retourne_resultats(score_processus):
 
     return render_template(
         "resultats_recherche.html",
+        base_info=base_info,
         p_gagnant=p_gagnant,
         p_pertinents=p_pertinents,
         p_autres=p_autres,
