@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS processus;
 
 CREATE TABLE processus (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug TEXT NOT NULL,
     titre TEXT NOT NULL,
     description TEXT NOT NULL,
     -- textes :

@@ -7,10 +7,10 @@
 <ul id="liste-familles">
     {% for famille in processus_par_famille.keys() %}
     <li>
-        <a href="processus/{{ famille['id'] }}">{{ famille["titre"]}}</a>
+        <a href="processus/{{ famille['slug'] }}">{{ famille["titre"]}}</a>
         <ul>
             {% for processus in processus_par_famille[famille] %}
-                <li><a href="processus/{{ processus['id'] }}">{{ processus["titre"]}}</a></li>
+                <li><a href="processus/{{ processus['slug'] }}">{{ processus["titre"]}}</a></li>
             {% endfor %}
         </ul>
     </li>

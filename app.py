@@ -141,6 +141,7 @@ conf = {
     ],
 }
 
+
 def debug_var(var):
     """pour débuguer les variables."""
     print("=============== DEBUG ==============")
@@ -180,7 +181,7 @@ def get_db_connection():
     return conn
 
 
-def retourne_un_processus(id_processus) -> dict:
+def retourne_un_processus(id_processus: int) -> dict:
     """Retourne uniquement un processus.
     Prend l'ID du processus en argument.
     Renvoie un dictionnaire"""
@@ -190,6 +191,20 @@ def retourne_un_processus(id_processus) -> dict:
     WHERE id = ?
     LIMIT 1"""
     result = conn.execute(req_select, [id_processus]).fetchall()
+    conn.close()
+    return result
+
+
+def retourne_un_processus_via_slug(slug: str) -> dict:
+    """Retourne uniquement un processus.
+    Prend le slug du processus en argument.
+    Renvoie un dictionnaire"""
+    conn = get_db_connection()
+    req_select = """SELECT *
+    FROM processus
+    WHERE slug = ?
+    LIMIT 1"""
+    result = conn.execute(req_select, [slug]).fetchall()
     conn.close()
     return result
 
@@ -258,10 +273,10 @@ def index():
     )
 
 
-@app.route("/processus/<id_processus>")
-def get_processus(id_processus):
+@app.route("/processus/<slug>")
+def get_processus(slug):
     """Affiche le détail d'un processus."""
-    result = retourne_un_processus(id_processus)
+    result = retourne_un_processus_via_slug(slug)
     if len(result) > 0:
         processus = result[0]
         return render_template(
