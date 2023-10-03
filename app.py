@@ -7,70 +7,139 @@ from flask import request
 PROJECT_ROOT = path.dirname(path.realpath(__file__))
 DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
 
-__VERSION__ = "1.0"
+__VERSION__ = "2.0"
 base_info = {
     "version": __VERSION__,
 }
 
 app = Flask(__name__)
 
-# La liste des critères avec leur nom interne et leur nom d'affichage
-criteres = [
-    {
-        "id": "rapidite",
-        "nom": "Rapidité",
-    },
-    {
-        "id": "enjeu",
-        "nom": "Pour enjeu",
-    },
-    {
-        "id": "simplicite",
-        "nom": "Simplicité",
-    },
-    {
-        "id": "taille_groupe",
-        "nom": "Pour taille de groupe",
-    },
-    {
-        "id": "adhesion",
-        "nom": "Niveau d'adhésion généré",
-    },
-]
-# toutes les caractéristiques qui peuvent être affichées dans un processus
-caracteristiques = [
-    {
-        "id": "avantages",
-        "nom": "Avantages",
-        "couleur": "lightgreen",
-    },
-    {
-        "id": "adapte",
-        "nom": "Adapté",
-        "couleur": "lightblue",
-    },
-    {
-        "id": "risques",
-        "nom": "Risques",
-        "couleur": "#fce1bb",
-    },
-    {
-        "id": "inconvenients",
-        "nom": "Inconvénients",
-        "couleur": "lightcoral",
-    },
-    {
-        "id": "deconseille",
-        "nom": "Déconseillé",
-        "couleur": "#ff9259",
-    },
-    {
-        "id": "points_cles",
-        "nom": "Points clés",
-        "couleur": "lightgoldenrodyellow",
-    },
-]
-
+conf = {
+    # La liste des critères avec leur nom interne et leur nom d'affichage
+    "criteres": [
+        {
+            "id": "temps",
+            "nom": "Temps nécessaire",
+            "echelle": [
+                "Secondes",
+                "Minutes",
+                "",
+                "Heures",
+                "",
+                "Jours",
+                "Semaines",
+            ],
+        },
+        {
+            "id": "enjeu",
+            "nom": "Niveau d'enjeu",
+            "echelle": [
+                "Faible",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "Fort",
+            ],
+        },
+        {
+            "id": "simplicite",
+            "nom": "Simplicité",
+            "echelle": [
+                "Groupe novice sans facilitateur expérimenté",
+                "",
+                "Groupe avec facilitateur expérimenté",
+                "",
+                "Participants et facilitateur expérimentés / formés",
+            ],
+        },
+        {
+            "id": "taille_groupe",
+            "nom": "Pour taille de groupe",
+            "echelle": [
+                "1",
+                "4",
+                "8",
+                "16",
+                "Dizaines",
+                "Centaines",
+                "Milliers",
+                "Millions",
+            ],
+        },
+        {
+            "id": "adhesion",
+            "nom": "Niveau d'adhésion",
+            "echelle": [
+                "Faible (être informé)",
+                "",
+                "Moyen (Accepter)",
+                "",
+                "Fort (Mettre en oeuvre spontanément = sans pression)",
+            ],
+        },
+        {
+            "id": "creativite",
+            "nom": "Créativité",
+            "echelle": [
+                "Faible",
+                "",
+                "Modérée",
+                "",
+                "Forte",
+            ],
+        },
+    ],
+    # les critères optionnels
+    "criteres_optionnels": [
+        {
+            "id": "besoin_trancher",
+            "nom": "Besoin de trancher",
+        },
+        {
+            "id": "sujet_conflictuel",
+            "nom": "Sujet conflictuel",
+        },
+        {
+            "id": "asynchrone",
+            "nom": "Asynchrone",
+        },
+    ],
+    # toutes les caractéristiques qui peuvent être affichées dans un processus
+    "caracteristiques": [
+        {
+            "id": "avantages",
+            "nom": "Avantages",
+            "couleur": "lightgreen",
+        },
+        {
+            "id": "adapte",
+            "nom": "Adapté",
+            "couleur": "lightblue",
+        },
+        {
+            "id": "risques",
+            "nom": "Risques",
+            "couleur": "#fce1bb",
+        },
+        {
+            "id": "inconvenients",
+            "nom": "Inconvénients",
+            "couleur": "lightcoral",
+        },
+        {
+            "id": "deconseille",
+            "nom": "Déconseillé",
+            "couleur": "#ff9259",
+        },
+        {
+            "id": "points_cles",
+            "nom": "Points clés",
+            "couleur": "lightgoldenrodyellow",
+        },
+    ],
+}
 
 def debug_var(var):
     """pour débuguer les variables."""
@@ -85,10 +154,23 @@ def crit_filter(crit):
     """Renvoie la valeur de l'opacité en fonction du code du critère."""
     result = {
         "0": "0",
-        "1": "0.5",
-        "2": "1",
+        "1": "0.3",
+        "2": "0.6",
+        "3": "1",
     }
     return result[crit]
+
+
+@app.template_filter()
+def note_critere(note):
+    """Renvoie l'affichage de la note du critère optionnel.
+    Si le critère n'est pas renseigné, il est à `-1`, sinon, il est un nombre entre 0 et 12 inclus."""
+    if (not isinstance(note, int)) or note > 12 or note < -1:
+        return "Erreur : note incorrecte"
+    if note == -1:
+        return "Non spécifié"
+    else:
+        return f"{note} / 12"
 
 
 def get_db_connection():
@@ -185,10 +267,10 @@ def get_processus(id_processus):
         return render_template(
             "processus.html",
             base_info=base_info,
+            conf=conf,
             processus=processus,
-            caracteristiques=caracteristiques,
-            criteres=criteres,
         )
+    # TODO : une plus belle page d'erreur
     return "processus introuvable."
 
 
@@ -285,7 +367,7 @@ def get_processus_score_mots_cles(processus, mots_cles):
 @app.route("/recherche_criteres")
 def get_recherche_criteres():
     """Fonction de recherche par critères."""
-    id_criteres = [i["id"] for i in criteres]
+    id_criteres = [i["id"] for i in conf["criteres"]]
     criteres_voulus = {}
     for id_critere in id_criteres:
         if id_critere in request.args:

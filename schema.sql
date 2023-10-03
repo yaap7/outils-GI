@@ -20,9 +20,13 @@ CREATE TABLE processus (
     -- 0 = blanc
     -- 1 = vert pale
     -- 2 = vert foncé
-    rapidite TEXT NOT NULL,
+    temps TEXT NOT NULL,
     enjeu TEXT NOT NULL,
     simplicite TEXT NOT NULL,
     taille_groupe TEXT NOT NULL,
-    adhesion TEXT NOT NULL
+    adhesion TEXT NOT NULL,
+    creativite TEXT NOT NULL,
+    besoin_trancher INTEGER NOT NULL,
+    sujet_conflictuel INTEGER NOT NULL,
+    asynchrone INTEGER NOT NULL
 );
