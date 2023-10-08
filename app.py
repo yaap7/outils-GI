@@ -174,6 +174,19 @@ def note_critere(note):
         return f"{note} / 12"
 
 
+@app.template_filter()
+def pourcent_critere(note):
+    """Renvoie la note ramenée sur 100.
+    Si le critère n'est pas renseigné, il est à `-1`, sinon, il est un nombre entre 0 et 12 inclus.
+    Par exemple, si le critère est à 7, le résultat sera `7 * 100 / 12 = 58`"""
+    if (not isinstance(note, int)) or note > 12 or note < -1:
+        return "Erreur : note incorrecte"
+    if note == -1:
+        return "Non spécifié"
+    else:
+        return int(note * 100 / 12)
+
+
 def get_db_connection():
     """Renvoie une connexion à la base de données."""
     conn = sqlite3.connect(DATABASE_PATH)
