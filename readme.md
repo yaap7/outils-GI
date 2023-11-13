@@ -8,6 +8,8 @@ Version : 1.0
 
 * [ ] Convertir tous les processus pour tester les nouveaux critères de Sacha.
 * [ ] Réfléchir à rajouter des processus d'élection.
+* [ ] Refaire la fonction de recherche
+* [ ] faire une vérification des données insérées en base lors de l'import via `init_db.py`.
 * [x] Il est plus facile de rajouter des processus (via des fichiers JSON dans le répertoire `data`), même si ce n'est pas encore accessible à tout le monde.
 * [x] Insérer la licence et la paternité sur toutes les pages (bas de page).
 * [x] Intégrer les autres processus.
