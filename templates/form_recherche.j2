@@ -7,60 +7,22 @@
     Vous pouvez aussi faire une recherche par critères
 </p>
 <form action="recherche_criteres" method="get">
-    <!-- Rapidité -->
-    <label class="label">Rapidité</label>
-    <table class="table is-fullwidth text-center table-radio">
-    <tr>
-        {% for num in range(14) %}
-        <td><input type="radio" name="rapidite" value="{{ num }}"></td>
-        {% endfor %}
-    </tr>
-    </table>
-    {% include 'legende_rapidite.j2' %}
 
-    <!-- Enjeu -->
-    <label class="label">Pour enjeu</label>
-    <table class="table is-fullwidth text-center table-radio">
-    <tr>
-        {% for num in range(14) %}
-        <td><input type="radio" name="enjeu" value="{{ num }}"></td>
-        {% endfor %}
-    </tr>
-    </table>
-    {% include 'legende_enjeu.j2' %}
-
-    <!-- Simplicité -->
-    <label class="label">Simplicité</label>
-    <table class="table is-fullwidth text-center table-radio">
-    <tr>
-        {% for num in range(14) %}
-        <td><input type="radio" name="simplicite" value="{{ num }}"></td>
-        {% endfor %}
-    </tr>
-    </table>
-    {% include 'legende_simplicite.j2' %}
-
-    <!-- taille_groupe -->
-    <label class="label">Pour taille de groupe</label>
-    <table class="table is-fullwidth text-center table-radio">
-    <tr>
-        {% for num in range(14) %}
-        <td><input type="radio" name="taille_groupe" value="{{ num }}"></td>
-        {% endfor %}
-    </tr>
-    </table>
-    {% include 'legende_taille_groupe.j2' %}
-
-    <!-- Adhésion -->
-    <label class="label">Adhésion</label>
-    <table class="table is-fullwidth text-center table-radio">
-    <tr>
-        {% for num in range(14) %}
-        <td><input type="radio" name="adhesion" value="{{ num }}"></td>
-        {% endfor %}
-    </tr>
-    </table>
-    {% include 'legende_adhesion.j2' %}
+    {% for critere in conf["criteres"] %}
+        <label class="label">{{ critere['nom'] }}</label>
+        <table class="table is-fullwidth text-center table-radio">
+        <tr>
+            {% for num in range(critere['echelle'] | length) %}
+            <td><input type="radio" name="{{ critere['id'] }}" value="{{ num }}"></td>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for echelle in critere['echelle'] %}
+            <td>{{ echelle }}</td>
+            {% endfor %}
+        </tr>
+        </table>
+    {% endfor %}
 
     <div class="field is-grouped is-grouped-right">
     <p class="control">
@@ -71,12 +33,10 @@
 
 <hr>
 
-
 <p class="subtitle text-center">
     Il est aussi possible de faire une recherche par mots-clés
 </p>
 <form action="recherche_mots-cles" method="get">
-    <!-- Rapidité -->
     <label class="mots-cles">Mots-clés : </label>
     <input id="input_mots-cles" type="text" name="mots-cles">
 

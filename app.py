@@ -282,6 +282,7 @@ def index():
     return render_template(
         "index.html",
         base_info=base_info,
+        conf=conf,
         processus_par_famille=processus_par_famille,
     )
 
@@ -313,25 +314,28 @@ def get_processus_score_criteres(processus, criteres_voulus) -> int:
     La valeur pour les critères voulus doit être comprise entre 0 et 13 compris.
 
     Pour chaque critère, le processus gagne les points suivants :
-        - 10 si c'est du vert foncé ;
-        - 5 si c'est du vert clair ;
-        - -5 si c'est du blanc.
+        - 15 si c'est = 3 (vert foncé) ;
+        - 10 si c'est = 2 ;
+        - 5 si c'est = 1 ;
+        - -5 si c'est = 0 (blanc).
     + pour chaque carré adjacent (à 1 de distance) :
-        - 6 si c'est du vert foncé ;
-        - 2 si c'est du vert clair ;
-        - -2 si c'est du blanc ;
+        - 6 si c'est = 3 (vert foncé) ;
+        - 4 si c'est = 2 ;
+        - 2 si c'est = 1 ;
+        - -2 si c'est = 0 (blanc) ;
     + pour chaque carré à 2 de distance :
-        - 3 si c'est du vert foncé ;
-        - 1 si c'est du vert clair ;
-        - -1 si c'est du blanc.
+        - 3 si c'est = 3 (vert foncé) ;
+        - 2 si c'est = 2 ;
+        - 1 si c'est = 1 ;
+        - -1 si c'est = 0 (blanc)
 
     Exemple : je veux une rapidité de 5 :
 
-    00022100000000
+    00022310000000
         ^
     indice voulu
 
-    alors score = 10 + 6 + 2 - 1 - 1 = 16
+    alors score = 10 + 4 + 6 - 1 + 1 = 20
     """
 
     def get_affinity(critere_processus, indice_voulu, adjacent=0) -> int:
@@ -339,19 +343,22 @@ def get_processus_score_criteres(processus, criteres_voulus) -> int:
             # sur le bon indice (0 de distance)
             0: {
                 # couleur du carré = score
+                3: 15,
                 2: 10,
                 1: 5,
                 0: -5,
             },
             # à 1 de distance
             1: {
-                2: 6,
+                3: 6,
+                2: 4,
                 1: 2,
                 0: -2,
             },
             # à 2 de distance
             2: {
-                2: 3,
+                3: 3,
+                2: 2,
                 1: 1,
                 0: -1,
             },
@@ -362,16 +369,18 @@ def get_processus_score_criteres(processus, criteres_voulus) -> int:
     for critere_voulu in criteres_voulus:
         # obtention du score pour la valeur demandée
         indice_voulu = int(criteres_voulus[critere_voulu])
+        print(f"je veux l'indice {indice_voulu}")
+        print(f"processus[critere_voulu] = {processus[critere_voulu]}")
         score += get_affinity(processus[critere_voulu], indice_voulu)
         # évolution du score grâce aux valeurs adjacentes (à 1 de distance)
         if indice_voulu > 0:
             score += get_affinity(processus[critere_voulu], indice_voulu, -1)
-        if indice_voulu < 13:
+        if indice_voulu < (len(processus[critere_voulu]) - 1):
             score += get_affinity(processus[critere_voulu], indice_voulu, 1)
         # évolution du score grâce aux valeurs adjacentes (à 2 de distance)
         if indice_voulu > 1:
             score += get_affinity(processus[critere_voulu], indice_voulu, -2)
-        if indice_voulu < 12:
+        if indice_voulu < (len(processus[critere_voulu]) - 2):
             score += get_affinity(processus[critere_voulu], indice_voulu, 2)
     return score
 
@@ -404,7 +413,7 @@ def get_recherche_criteres():
     for processus in retourne_tous_les_processus():
         score = get_processus_score_criteres(processus, criteres_voulus)
         score_processus[processus] = score
-    return tri_et_retourne_resultats(score_processus)
+    return tri_et_retourne_resultats(criteres_voulus, score_processus)
 
 
 @app.route("/recherche_mots-cles")
@@ -442,10 +451,10 @@ def get_recherche_mots_cles():
             ):
                 score += 1
         score_processus[processus] = score
-    return tri_et_retourne_resultats(score_processus)
+    return tri_et_retourne_resultats(mots_cles, score_processus)
 
 
-def tri_et_retourne_resultats(score_processus):
+def tri_et_retourne_resultats(criteres, score_processus):
     """Fonction qui trie les processus par score et renvoie la page de résultat de la recherche."""
     processus_triees = []
     for processus, score in sorted(
@@ -458,6 +467,7 @@ def tri_et_retourne_resultats(score_processus):
         return render_template(
             "resultats_recherche_vide.html",
             base_info=base_info,
+            criteres=criteres,
         )
     p_gagnant = processus_triees[0]
     # détermination des autres process
@@ -480,6 +490,7 @@ def tri_et_retourne_resultats(score_processus):
     return render_template(
         "resultats_recherche.html",
         base_info=base_info,
+        criteres=criteres,
         p_gagnant=p_gagnant,
         p_pertinents=p_pertinents,
         p_autres=p_autres,

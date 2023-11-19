@@ -6,6 +6,7 @@ import sqlite3
 from os import path
 from os import listdir
 
+
 def main():
     """main function"""
     connection = sqlite3.connect("database.db")

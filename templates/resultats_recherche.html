@@ -10,9 +10,21 @@
       <h1 class="title is-1 text-center" id="titre">
         Résultats de la recherche
       </h1>
+      <!-- 
+        On pourra afficher ça quand on aura des textes pour chaque niveau de critère
+      <div>
+        <h2 class="title is-2">Critères recherchés</h2>
+        <ul>
+        {% for key in criteres %}
+          <li>{{ key }} = {{ criteres[key] }}</li>
+        {% endfor %}
+        </ul>
+      </div>
+      -->
+
       <div>
         <h2 class="title is-2">🥇 Processus recommandé</h2>
-        <p>Le processus « <a href="processus/{{ p_gagnant[0]['id']}}">{{ p_gagnant[0]["titre"] }}</a> » a obtenu un score de {{ p_gagnant[1] }}</p>
+        <p>Le processus « <a href="processus/{{ p_gagnant[0]['slug']}}">{{ p_gagnant[0]["titre"] }}</a> » a obtenu un score de {{ p_gagnant[1] }}</p>
       </div>
 
       {% if p_pertinents %}
@@ -21,7 +33,7 @@
         <p>Ces processus de décision pourraient également répondre au besoin :</p>
         <ul>
           {% for process in p_pertinents %}
-          <li>Le processus « <a href="processus/{{ process[0]['id']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+          <li>Le processus « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
           {% endfor %}
         </ul>
       </div>
@@ -33,7 +45,7 @@
         <p>Ces processus ont un score positif, mais ne sont sûrement pas les plus pertinents :</p>
         <ul>
           {% for process in p_autres %}
-          <li>Le processus « <a href="processus/{{ process[0]['id']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+          <li>Le processus « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
           {% endfor %}
         </ul>
       </div>
@@ -45,7 +57,7 @@
         <p>Ces processus ont renvoyés un score négatif et ne sont pas recommandés :</p>
         <ul>
           {% for process in p_deconseille %}
-          <li>Le processus « <a href="processus/{{ process[0]['id']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+          <li>Le processus « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
           {% endfor %}
         </ul>
       </div>
