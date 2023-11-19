@@ -299,7 +299,6 @@ def get_processus(slug):
             conf=conf,
             processus=processus,
         )
-    # TODO : une plus belle page d'erreur
     return "processus introuvable."
 
 

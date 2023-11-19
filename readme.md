@@ -2,14 +2,19 @@
 
 Ceci est une pale tentative de numériser la boîte à outils de la [Gouvernance Intégrative](https://gouvernanceintegrative.com/) créée par Sacha Epp.
 
-Version : 1.0
+Version : 2.0
 
 ## Todolist
 
-* [ ] Convertir tous les processus pour tester les nouveaux critères de Sacha.
+* [ ] Rajouter le texte des processus d'après le PDf de la boite à outils.
+* [ ] Voir avec Sacha s'il ne faudrait pas rajouter quelques processus dans chaque famille ou presque.
+* [ ] Faire une nouvelle fonction de recherche en 2 ou 3 questions ("quelle est la taille du groupe ?", puis "quel est l'enjeu principal ? temps, adhésion, peu formé, etc" et peut-être question secondaire si applicable.)
 * [ ] Réfléchir à rajouter des processus d'élection.
-* [ ] Refaire la fonction de recherche
 * [ ] faire une vérification des données insérées en base lors de l'import via `init_db.py`.
+* [ ] Faire une plus belle page d'erreur lorsque le processus n'est pas trouvé (fonction `get_processus`).
+* [ ] Prendre en compte l'ID ou le slug pour trouver un processus (fonction `get_processus`).
+* [x] Convertir tous les processus pour tester les nouveaux critères de Sacha.
+* [x] Refaire la fonction de recherche
 * [x] Il est plus facile de rajouter des processus (via des fichiers JSON dans le répertoire `data`), même si ce n'est pas encore accessible à tout le monde.
 * [x] Insérer la licence et la paternité sur toutes les pages (bas de page).
 * [x] Intégrer les autres processus.
