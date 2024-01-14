@@ -22,42 +22,42 @@
       </div>
       -->
 
-      <div>
+      <div class="mb-5">
         <h2 class="title is-2">🥇 Processus recommandé</h2>
-        <p>Le processus « <a href="processus/{{ p_gagnant[0]['slug']}}">{{ p_gagnant[0]["titre"] }}</a> » a obtenu un score de {{ p_gagnant[1] }}</p>
+        <p>{{ p_gagnant[0]|p_type_el }} « <a href="processus/{{ p_gagnant[0]['slug'] }}">{{ p_gagnant[0]["titre"] }}</a> » a obtenu un score de {{ p_gagnant[1] }}</p>
       </div>
 
       {% if p_pertinents %}
-      <div>
+      <div class="mb-5">
         <h2 class="title is-2">🥈 Autres méthodes pertinentes</h2>
         <p>Ces processus de décision pourraient également répondre au besoin :</p>
         <ul>
           {% for process in p_pertinents %}
-          <li>Le processus « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+          <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
           {% endfor %}
         </ul>
       </div>
       {% endif %}
 
       {% if p_autres %}
-      <div>
+      <div class="mb-5">
         <h2 class="title is-2">🥉 Autres processus</h2>
         <p>Ces processus ont un score positif, mais ne sont sûrement pas les plus pertinents :</p>
         <ul>
           {% for process in p_autres %}
-          <li>Le processus « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+          <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
           {% endfor %}
         </ul>
       </div>
       {% endif %}
 
       {% if p_deconseille %}
-      <div>
+      <div class="mb-5">
         <h2 class="title is-2">❌ Méthodes déconseillées</h2>
         <p>Ces processus ont renvoyés un score négatif et ne sont pas recommandés :</p>
         <ul>
           {% for process in p_deconseille %}
-          <li>Le processus « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+          <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
           {% endfor %}
         </ul>
       </div>

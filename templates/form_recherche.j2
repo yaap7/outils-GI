@@ -1,48 +1,51 @@
-<h2 class="title is-2 text-center" id="titre">
-    Recherche
-</h2>
+<div class="border-shadow-light p-3">
+    <h2 class="title is-2 text-center" id="titre">
+        Recherche par critères
+    </h2>
+    <form action="recherche_criteres" method="get">
 
+        {% for critere in conf["criteres"] %}
+            <label class="label">{{ critere['nom'] }}</label>
+            <div class="table-container">
+                <table class="table is-fullwidth text-center table-radio is-borderless">
+                <thead>
+                    <tr>
+                        {% for echelle in critere['echelle'] %}
+                        <td>{{ echelle }}</td>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for num in range(critere['echelle'] | length) %}
+                        <td><input type="radio" name="{{ critere['id'] }}" value="{{ num }}"></td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        {% endfor %}
 
-<p class="subtitle text-center">
-    Vous pouvez aussi faire une recherche par critères
-</p>
-<form action="recherche_criteres" method="get">
+        <div class="field is-grouped is-grouped-right">
+        <p class="control">
+            <input class="button is-link" type="submit" value="Rechercher par critères">
+        </p>
+        </div>
+    </form>
+</div>
 
-    {% for critere in conf["criteres"] %}
-        <label class="label">{{ critere['nom'] }}</label>
-        <table class="table is-fullwidth text-center table-radio">
-        <tr>
-            {% for num in range(critere['echelle'] | length) %}
-            <td><input type="radio" name="{{ critere['id'] }}" value="{{ num }}"></td>
-            {% endfor %}
-        </tr>
-        <tr>
-            {% for echelle in critere['echelle'] %}
-            <td>{{ echelle }}</td>
-            {% endfor %}
-        </tr>
-        </table>
-    {% endfor %}
+<div class="border-shadow-light p-3">
+    <h2 class="title is-2 text-center" id="titre">
+        Recherche par mots-clés
+    </h2>
+    <form action="recherche_mots-cles" method="get">
+        <label class="mots-cles">Mots-clés : </label>
+        <input id="input_mots-cles" type="text" name="mots-cles">
 
-    <div class="field is-grouped is-grouped-right">
-    <p class="control">
-        <input class="button is-link" type="submit" value="Rechercher par critères">
-    </p>
-    </div>
-</form>
-
-<hr>
-
-<p class="subtitle text-center">
-    Il est aussi possible de faire une recherche par mots-clés
-</p>
-<form action="recherche_mots-cles" method="get">
-    <label class="mots-cles">Mots-clés : </label>
-    <input id="input_mots-cles" type="text" name="mots-cles">
-
-    <div class="field is-grouped is-grouped-right">
-    <p class="control">
-        <input class="button is-link" type="submit" value="Rechercher par mots-clés">
-    </p>
-    </div>
-</form>
+        <div class="field is-grouped is-grouped-right">
+        <p class="control">
+            <input class="button is-link" type="submit" value="Rechercher par mots-clés">
+        </p>
+        </div>
+    </form>
+</div>

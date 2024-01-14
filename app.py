@@ -7,7 +7,7 @@ from flask import request
 PROJECT_ROOT = path.dirname(path.realpath(__file__))
 DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
 
-__VERSION__ = "2.0"
+__VERSION__ = "2.1"
 base_info = {
     "version": __VERSION__,
 }
@@ -96,14 +96,17 @@ conf = {
         {
             "id": "besoin_trancher",
             "nom": "Besoin de trancher",
+            "help": "",
         },
         {
             "id": "sujet_conflictuel",
             "nom": "Sujet conflictuel",
+            "help": "",
         },
         {
             "id": "asynchrone",
             "nom": "Asynchrone",
+            "help": "(faisable sans être réuni au même moment)",
         },
     ],
     # toutes les caractéristiques qui peuvent être affichées dans un processus
@@ -185,6 +188,16 @@ def pourcent_critere(note):
         return "Non spécifié"
     else:
         return int(note * 100 / 12)
+
+
+@app.template_filter()
+def p_type_el(processus):
+    """Affiche "Le processus" ou "La famille de processus" en fonction du type de processus passé en paramètre."""
+    if processus["id"] % 100 == 0:
+        # c'est une famille
+        return "La famille de processus"
+    # c'est un processus
+    return "Le processus"
 
 
 def get_db_connection():
@@ -409,9 +422,17 @@ def get_recherche_criteres():
         if id_critere in request.args:
             criteres_voulus[id_critere] = request.args.get(id_critere)
     score_processus = {}
-    for processus in retourne_tous_les_processus():
-        score = get_processus_score_criteres(processus, criteres_voulus)
-        score_processus[processus] = score
+    try:
+        for processus in retourne_tous_les_processus():
+            score = get_processus_score_criteres(processus, criteres_voulus)
+            score_processus[processus] = score
+    except IndexError:
+        # pour palier à un attaquant qui mettrait un nombre en dehors du champ
+        return render_template(
+            "resultats_recherche_vide.html",
+            base_info=base_info,
+            message="Des nombres invalides ont été entrés.",
+        )
     return tri_et_retourne_resultats(criteres_voulus, score_processus)
 
 
@@ -424,9 +445,9 @@ def get_recherche_mots_cles():
         or request.args["mots-cles"] == ""
     ):
         return render_template(
-            "resultats_recherche_mots-cles.html",
+            "resultats_recherche_vide.html",
             base_info=base_info,
-            args="rien reçu !",
+            message="Aucun mot-clé reçu.",
         )
     mots_cles = request.args["mots-cles"].split(" ")
     score_processus = {}
@@ -466,7 +487,7 @@ def tri_et_retourne_resultats(criteres, score_processus):
         return render_template(
             "resultats_recherche_vide.html",
             base_info=base_info,
-            criteres=criteres,
+            message="Votre recherche n'a renvoyé aucun résultat.",
         )
     p_gagnant = processus_triees[0]
     # détermination des autres process

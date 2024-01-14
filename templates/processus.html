@@ -55,22 +55,6 @@
       </div>
       <div class="column" id="caracteristiques">
 
-        {% for critere_optionnel in conf["criteres_optionnels"] %}
-          {% if processus[critere_optionnel["id"]] %}
-            <div class="critere_optionnel border-shadow-light">
-              <p>
-                <strong>{{ critere_optionnel["nom"] }}</strong> :
-                {{ processus[critere_optionnel["id"]]|note_critere }}
-              </p>
-              {% if processus[critere_optionnel['id']] > 0 and processus[critere_optionnel['id']] <= 12 %}
-                <progress class="progress is-info" value="{{ processus[critere_optionnel['id']]|pourcent_critere }}" max="100">{{ processus[critere_optionnel["id"]]|pourcent_critere }}%</progress>
-              {% else %}
-                <progress class="progress is-info" value="0" max="100">0%</progress>
-              {% endif %}
-            </div>
-          {% endif %}
-        {% endfor %}
-
         {% for caracteristique in conf["caracteristiques"] %}
           {% if processus[caracteristique["id"]] %}
             <div class="caracteristique" style="border-color: {{ caracteristique["couleur"] }};">
@@ -82,6 +66,25 @@
               <div class="caracteristique-contenu">
                 {{ processus[caracteristique["id"]]|safe }}
               </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {% for critere_optionnel in conf["criteres_optionnels"] %}
+          {% if processus[critere_optionnel["id"]] %}
+            <div class="critere_optionnel border-shadow-light">
+              <p>
+                <strong>{{ critere_optionnel["nom"] }}</strong> :
+                {{ processus[critere_optionnel["id"]]|note_critere }}
+              </p>
+              <p>
+                {{ critere_optionnel["help"] }}
+              </p>
+              {% if processus[critere_optionnel['id']] > 0 and processus[critere_optionnel['id']] <= 12 %}
+                <progress class="progress is-info" value="{{ processus[critere_optionnel['id']]|pourcent_critere }}" max="100">{{ processus[critere_optionnel["id"]]|pourcent_critere }}%</progress>
+              {% else %}
+                <progress class="progress is-info" value="0" max="100">0%</progress>
+              {% endif %}
             </div>
           {% endif %}
         {% endfor %}

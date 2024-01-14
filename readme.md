@@ -1,8 +1,8 @@
 # Boîte à outils numérique de la Gouvernance Intégrative
 
-Ceci est une pale tentative de numériser la boîte à outils de la [Gouvernance Intégrative](https://gouvernanceintegrative.com/) créée par Sacha Epp.
+Ceci est une tentative de numériser la boîte à outils de la [Gouvernance Intégrative](https://gouvernanceintegrative.com/) créée par Sacha Epp.
 
-Version : 2.0
+Version : 2.1
 
 ## Todolist
 
@@ -13,6 +13,7 @@ Version : 2.0
 * [ ] faire une vérification des données insérées en base lors de l'import via `init_db.py`.
 * [ ] Faire une plus belle page d'erreur lorsque le processus n'est pas trouvé (fonction `get_processus`).
 * [ ] Prendre en compte l'ID ou le slug pour trouver un processus (fonction `get_processus`).
+* [x] Intégrer les modifications de Sacha du 26/12/2023.
 * [x] Convertir tous les processus pour tester les nouveaux critères de Sacha.
 * [x] Refaire la fonction de recherche
 * [x] Il est plus facile de rajouter des processus (via des fichiers JSON dans le répertoire `data`), même si ce n'est pas encore accessible à tout le monde.
