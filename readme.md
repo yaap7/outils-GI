@@ -2,7 +2,7 @@
 
 Ceci est une tentative de numériser la boîte à outils de la [Gouvernance Intégrative](https://gouvernanceintegrative.com/) créée par Sacha Epp.
 
-Version : 2.1
+Version : 2.2
 
 ## Todolist
 
