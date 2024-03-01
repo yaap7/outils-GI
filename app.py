@@ -3,6 +3,7 @@ from os import path
 from flask import Flask
 from flask import render_template
 from flask import request
+from re import compile
 
 PROJECT_ROOT = path.dirname(path.realpath(__file__))
 DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
@@ -312,7 +313,12 @@ def get_processus(slug):
             conf=conf,
             processus=processus,
         )
-    return "processus introuvable."
+    return render_template(
+        "resultats_recherche_vide.html",
+        base_info=base_info,
+        message="Ce processus est introuvable.",
+        recherche_par_mot_cle=False,
+    )
 
 
 def get_processus_score_criteres(processus, criteres_voulus) -> int:
@@ -397,20 +403,20 @@ def get_processus_score_criteres(processus, criteres_voulus) -> int:
     return score
 
 
-def get_processus_score_mots_cles(processus, mots_cles):
-    score = 0
-    for mot_cle in mots_cles:
-        if mot_cle in processus["titre"]:
-            score += 50
-        if mot_cle in processus["adapte"]:
-            score += 10
-        if mot_cle in processus["avantages"]:
-            score += 10
-        if mot_cle in processus["points_cles"]:
-            score += 2
-        if mot_cle in processus["description"]:
-            score += 1
-    return score
+# def get_processus_score_mots_cles(processus, mots_cles):
+#     score = 0
+#     for mot_cle in mots_cles:
+#         if mot_cle in processus["titre"]:
+#             score += 50
+#         if mot_cle in processus["adapte"]:
+#             score += 10
+#         if mot_cle in processus["avantages"]:
+#             score += 10
+#         if mot_cle in processus["points_cles"]:
+#             score += 2
+#         if mot_cle in processus["description"]:
+#             score += 1
+#     return score
 
 
 @app.route("/recherche_criteres")
@@ -431,9 +437,25 @@ def get_recherche_criteres():
         return render_template(
             "resultats_recherche_vide.html",
             base_info=base_info,
-            message="Des nombres invalides ont été entrés.",
+            message="Un nombre invalide a été reçu.",
+            recherche_par_mot_cle=False,
         )
-    return tri_et_retourne_resultats(criteres_voulus, score_processus)
+    return tri_et_retourne_resultats(criteres_voulus, score_processus, False)
+
+
+def __get_score(mot_cle: str, phrase: str, score: int):
+    if mot_cle is None or phrase is None:
+        return 0
+    r_tag = compile(r"<[^>]*>")
+    r_espace = compile(r"[\s,;:.!?'()]+")
+    # suppression des tags HTML
+    _phrase = r_tag.sub(" ", phrase.lower())
+    # dédoublonage des espaces et ponctuation
+    _phrase = r_espace.sub(" ", _phrase)
+    mots = _phrase.split(" ")
+    if mot_cle.lower() in mots:
+        return score
+    return 0
 
 
 @app.route("/recherche_mots-cles")
@@ -448,33 +470,44 @@ def get_recherche_mots_cles():
             "resultats_recherche_vide.html",
             base_info=base_info,
             message="Aucun mot-clé reçu.",
+            recherche_par_mot_cle=False,
         )
+    mots_de_liaison = [
+        "le",
+        "la",
+        "un",
+        "les",
+        "du",
+        "de",
+        "des",
+        "à",
+        "a",
+        "mais",
+        "ou",
+        "et",
+        "donc",
+        "or",
+        "ni",
+        "car",
+        "dont",
+    ]
     mots_cles = request.args["mots-cles"].split(" ")
     score_processus = {}
     for processus in retourne_tous_les_processus():
         score = 0
         for mot_cle in mots_cles:
-            if processus["titre"] is not None and mot_cle in processus["titre"]:
-                score += 50
-            if processus["adapte"] is not None and mot_cle in processus["adapte"]:
-                score += 10
-            if processus["avantages"] is not None and mot_cle in processus["avantages"]:
-                score += 10
-            if (
-                processus["points_cles"] is not None
-                and mot_cle in processus["points_cles"]
-            ):
-                score += 2
-            if (
-                processus["description"] is not None
-                and mot_cle in processus["description"]
-            ):
-                score += 1
+            if mot_cle.lower() in mots_de_liaison:
+                continue
+            score += __get_score(mot_cle, processus["titre"], 50)
+            score += __get_score(mot_cle, processus["adapte"], 10)
+            score += __get_score(mot_cle, processus["avantages"], 10)
+            score += __get_score(mot_cle, processus["points_cles"], 2)
+            score += __get_score(mot_cle, processus["description"], 1)
         score_processus[processus] = score
-    return tri_et_retourne_resultats(mots_cles, score_processus)
+    return tri_et_retourne_resultats(mots_cles, score_processus, True)
 
 
-def tri_et_retourne_resultats(criteres, score_processus):
+def tri_et_retourne_resultats(criteres, score_processus, recherche_par_mot_cle: bool):
     """Fonction qui trie les processus par score et renvoie la page de résultat de la recherche."""
     processus_triees = []
     for processus, score in sorted(
@@ -488,6 +521,7 @@ def tri_et_retourne_resultats(criteres, score_processus):
             "resultats_recherche_vide.html",
             base_info=base_info,
             message="Votre recherche n'a renvoyé aucun résultat.",
+            recherche_par_mot_cle=recherche_par_mot_cle,
         )
     p_gagnant = processus_triees[0]
     # détermination des autres process
@@ -500,6 +534,8 @@ def tri_et_retourne_resultats(criteres, score_processus):
     p_deconseille = []
     # 3. enfin, le reste est négatif ou égal à 0 et n'est pas recommandé
     for processus in processus_triees[1:]:
+        if processus[1] == 0:
+            continue
         if processus[1] <= 0:
             p_deconseille.append(processus)
         elif processus[1] < float(meilleur_score) * 0.8:
