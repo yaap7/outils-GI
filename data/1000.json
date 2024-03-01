@@ -1,0 +1,17 @@
+{
+    "id": 1000,
+    "slug": "famille-non-choix",
+    "titre": "Non-choix",
+    "description": "<p>Ne pas prendre de décision. Il peut y avoir une multitude de raisons :</p><ol><li>reporter la décision</li><li>rejeter le thème (hors-sujet ou dépendant d’une autre instance)</li><li>oubli</li><li>accepter l’issue naturelle</li><li>incapacité à se réunir</li><li>incapacité à se mettre d’accord</li><li>...</li></ol><p>Une distinction majeure est de savoir si cette absence de décision est subie (ce qui est douloureux) ou choisie.</p>",
+    "avantages": "<ul><li>économie d’énergie</li><li>prendre le temps</li></ul>",
+    "risques": "<ul><li>frustrations</li><li>inertie</li></ul>",
+    "temps": "2222222",
+    "enjeu": "2222222",
+    "simplicite": "33333",
+    "taille_groupe": "22222222",
+    "adhesion": "22222",
+    "creativite": "31000",
+    "besoin_trancher": 0,
+    "sujet_conflictuel": 6,
+    "asynchrone": 11
+}

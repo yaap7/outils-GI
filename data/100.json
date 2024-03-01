@@ -1,0 +1,18 @@
+{
+    "id": 100,
+    "slug": "famille-votes-a-choix-multiples",
+    "titre": "Votes à choix multiples",
+    "description": "Les votes à choix multiples sont une famille de processus de décision dont le point commun est, sur un sujet donnée, de :<ul><li>faire émerger plusieurs propositions, les personnes impliquées se positionnent sur chaque proposition, celle avec la plus haute adhésion est validée</li> <li>ou de faire évoluer une proposition par une série de votes (amendements) jusqu’à sa validation.</li></ul>",
+    "avantages": "<ul><li>maîtrise du temps</li><li>forte intelligence collective</li><li>équité</li><li>met les participants dans une posture constructive</li><li>simple pour les participants</li></ul>",
+    "adapte": "<ul><li>décision demandant de la créativité</li><li>trancher les sujets conflictuels</li><li>les votants maîtrisent le sujet</li></ul>",
+    "risques": "<ul><li>énergivore (se perdre dans toutes les possibilités)</li><li>parfois délicat à faciliter</li></ul>",
+    "temps": "0133333",
+    "enjeu": "0123333",
+    "simplicite": "12333",
+    "taille_groupe": "02333333",
+    "adhesion": "01233",
+    "creativite": "12333",
+    "besoin_trancher": 10,
+    "sujet_conflictuel": 12,
+    "asynchrone": 5
+}

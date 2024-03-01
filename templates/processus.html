@@ -27,25 +27,35 @@
   <div class="container">
     <div class="columns">
       <div class="column text-center" id="criteres">
-        {% for critere in criteres %}
-          <div class="critere">
+        {% for critere in conf["criteres"] %}
+          <div class="critere border-shadow-light">
             <h2 class="title is-4">
               {{ critere["nom"] }}
             </h2>
-            {% for i in processus[critere["id"]] %}
-              <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="crit">
-                <!-- Rounded corner rectangle -->
-                <rect x="1" y="1" width="28" height="28" rx="5" style="fill:#1d7735;fill-opacity:{{ i | crit_filter }};stroke:black;stroke-width:2px;" />
-              </svg>
-            {% endfor %}
-          </div>
-          <div>
-            {% include 'legende_' + critere["id"] + '.j2' %}
+            <table class="critere">
+              <tbody>
+                <tr>
+                  {% for i in processus[critere["id"]] %}
+                    <td>
+                      <svg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg" class="crit">
+                        <rect x="1" y="1" width="28" height="28" rx="5" style="fill:#1d7735;fill-opacity:{{ i | crit_filter }};stroke:black;stroke-width:2px;" />
+                      </svg>
+                    </td>
+                  {% endfor %}
+                </tr>
+                <tr>
+                  {% for niveau in critere["echelle"] %}
+                    <td>{{ niveau }}</td>
+                  {% endfor %}
+                </tr>
+              </tbody>
+            </table>
           </div>
         {% endfor %}
       </div>
       <div class="column" id="caracteristiques">
-        {% for caracteristique in caracteristiques %}             
+
+        {% for caracteristique in conf["caracteristiques"] %}
           {% if processus[caracteristique["id"]] %}
             <div class="caracteristique" style="border-color: {{ caracteristique["couleur"] }};">
               <div class="caracteristique-titre" style="background-color: {{ caracteristique["couleur"] }};">
@@ -59,6 +69,26 @@
             </div>
           {% endif %}
         {% endfor %}
+
+        {% for critere_optionnel in conf["criteres_optionnels"] %}
+          {% if processus[critere_optionnel["id"]] %}
+            <div class="critere_optionnel border-shadow-light">
+              <p>
+                <strong>{{ critere_optionnel["nom"] }}</strong> :
+                {{ processus[critere_optionnel["id"]]|note_critere }}
+              </p>
+              <p>
+                {{ critere_optionnel["help"] }}
+              </p>
+              {% if processus[critere_optionnel['id']] > 0 and processus[critere_optionnel['id']] <= 12 %}
+                <progress class="progress is-info" value="{{ processus[critere_optionnel['id']]|pourcent_critere }}" max="100">{{ processus[critere_optionnel["id"]]|pourcent_critere }}%</progress>
+              {% else %}
+                <progress class="progress is-info" value="0" max="100">0%</progress>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+
       </div>
     </div>
   </div>

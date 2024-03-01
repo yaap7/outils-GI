@@ -1,18 +1,20 @@
-<h2 class="title is-2 text-center" id="titre">
-    Processus
-</h2>
-<p class="subtitle text-center">
-    Voici la liste des processus de prise de décision en groupe, classé par famille
-</p>
-<ul id="liste-familles">
-    {% for famille in processus_par_famille.keys() %}
-    <li>
-        <a href="processus/{{ famille['id'] }}">{{ famille["titre"]}}</a>
-        <ul>
-            {% for processus in processus_par_famille[famille] %}
-                <li><a href="processus/{{ processus['id'] }}">{{ processus["titre"]}}</a></li>
-            {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
+<div class="border-shadow-light p-3">
+    <h2 class="title is-2 text-center" id="titre">
+        Processus
+    </h2>
+    <p class="subtitle text-center">
+        Voici la liste des processus de prise de décision, classé par famille
+    </p>
+    <ol id="liste-familles">
+        {% for famille in processus_par_famille.keys() %}
+        <li>
+            <a href="processus/{{ famille['slug'] }}">{{ famille["titre"]}}</a>
+            <ul>
+                {% for processus in processus_par_famille[famille] %}
+                    <li><a href="processus/{{ processus['slug'] }}">{{ processus["titre"]}}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ol>
+</div>

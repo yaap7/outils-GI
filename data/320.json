@@ -1,0 +1,19 @@
+{
+    "id": 320,
+    "slug": "consultation-collective",
+    "titre": "Consultation collective",
+    "description": "<strong>Processus</strong> : Une personne, le décideur, a la responsabilité d’une décision. Lors d’une réunion a lieu :<ol><li>Echange d’informations, clarification du sujet ou de la proposition</li><li>Tour de parole</li><li>Le décideur prend seul la décision (plutôt après la réunion) puis annonce sa décision</li></ol>",
+    "avantages": "<ul><li>bonne créativité</li><li>forte intelligence collective</li><li>tour de parole détendu, sans l’enjeu de converger</li><li>nourrit la cohésion</li></ul>",
+    "inconvenients": "<ul><li>écarts de pouvoir (souvent les mêmes décideurs)</li><li>nécessite d’être réunis</li></ul>",
+    "deconseille": "<ul><li>si le décideur n’est pas neutre pour un sujet conflictuel</li></ul>",
+    "points_cles": "<ul><li>requiert d’assumer de décider</li><li>demande un bon niveau de confiance dans le groupe et vis à vis du décideur</li><li>dépendant de la capacité d’écoute et de synthèse du décideur</li></ul>",
+    "temps": "0013320",
+    "enjeu": "0013332",
+    "simplicite": "33333",
+    "taille_groupe": "03321000",
+    "adhesion": "00232",
+    "creativite": "33332",
+    "besoin_trancher": 8,
+    "sujet_conflictuel": 3,
+    "asynchrone": 0
+}

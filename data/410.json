@@ -1,0 +1,20 @@
+{
+    "id": 410,
+    "slug": "consentement",
+    "titre": "Consentement",
+    "description": "<p><b>Processus</b>, en réunion :\n        <ol>\n            <li>Tour de clarification du sujet, partage des faits</li>\n            <li>Écoute du centre pour faire émerger les besoins et l’intelligence collective</li>\n            <li>Une personne / un sous-groupe fait une proposition</li>\n            <li>Tour de clarification de la proposition</li>\n            <li>Tour de ressenti sur la proposition</li>\n            <li>Amendement : Le proposeur peut modifier sa proposition</li>\n            <li>Tour d'objections</li>\n            <li>Pour chaque objection :<ul>\n                <li>Test de l'objection</li>\n                <li>Bonification ou retrait de la proposition par le proposeur</li>\n            </ul></li>\n            <li>La proposition est validée lorsqu'il n'y a plus d'objections.</li>\n        </ol></p>",
+    "avantages": "<ul>\n        <li>bonne adhésion</li>\n        <li>forte intelligence collective</li>\n        <li>respect de chacun⋅e</li>\n        <li>nourrit le lien</li>\n        </ul>",
+    "adapte": "<ul>\n        <li>sujet irréversible</li>\n        </ul>",
+    "risques": "<ul>\n        <li>inertie, paralysie</li>\n        <li>épuisement</li>\n        <li>décision « molle »</li>\n        <li>pression sur les individus pour avoir la bonne posture</li>\n        </ul>",
+    "deconseille": "<ul>\n        <li>les sujets urgents</li>\n        <li>quand des avis irréconciliables coexistent</li>\n        </ul>",
+    "points_cles": "<ul>\n        <li>nécessite formation et posture coopérative des participants</li>\n        <li>nécessite un objectif commun, un excellent facilitateur</li>\n        </ul>",
+    "temps": "0123321",
+    "enjeu": "0123332",
+    "simplicite": "01233",
+    "taille_groupe": "03332210",
+    "adhesion": "01332",
+    "creativite": "01310",
+    "besoin_trancher": -1,
+    "sujet_conflictuel": 10,
+    "asynchrone": 8
+}

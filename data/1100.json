@@ -1,0 +1,18 @@
+{
+    "id": 1100,
+    "slug": "famille-deleguer-la-decision-a-un-role",
+    "titre": "Déléguer la décision à un rôle",
+    "description": "<p>La décision est prise par une personne en vertu de son rôle.<br>C’est incontournable dans tous les groupes.<br>Il y a une énorme diversité dans la manière (formelle ou informelle) de les définir, de les acquérir, de se coordonner, de les exercer.</p>",
+    "avantages": "<ul><li>clarté</li><li>responsabilité</li><li>créativité individuelle</li><li>qualités et expertise de la personne l’exerçant.</li></ul>",
+    "risques": "<ul><li>manque d’intelligence collective</li><li>faible adhésion aux décisions</li><li>abus de pouvoir</li><li>conflits, confusion quand les limites du périmètre ne sont pas claires</li><li>défauts et limites de la personne l’exerçant.</li><li>épuisement de cette personne</li></ul>",
+    "points_cles": "<ul><li>Clarifier le périmètre du rôle est crucial</li></ul>",
+    "temps": "3333221",
+    "enjeu": "3333211",
+    "simplicite": "33333",
+    "taille_groupe": "03333333",
+    "adhesion": "33210",
+    "creativite": "33321",
+    "besoin_trancher": 8,
+    "sujet_conflictuel": 5,
+    "asynchrone": 12
+}

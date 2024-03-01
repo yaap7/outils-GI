@@ -12,13 +12,17 @@
         Aucun résultat
       </h1>
       <div>
-        <p>Votre recherche n'a renvoyé aucun résultat.</p>
+        <p>{{ message }}</p>
+      </div>
+      {% if recherche_par_mot_cle %}
+      <div>
         <p>
           Si vous avez fait une recherche par mots-clés, vous pouvez essayer de choisir des mots plus précis et représentant ce que vous cherchez.
-          Par exemple, les mots "rapidité", ou "adhésion".
+          Par exemple, les mots "intelligence collective", ou "adhésion".
           Il est possible de mettre plusieurs mots séparés par des espaces.
         </p>
       </div>
+      {% endif %}
 
     </div>
   </section>

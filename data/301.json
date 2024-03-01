@@ -1,0 +1,21 @@
+{
+    "id": 301,
+    "slug": "sollicitation-d-avis",
+    "titre": "Sollicitation d'avis",
+    "description": "<p><strong>Processus</strong> : Une personne (le décideur) est souveraine pour décider d’un sujet, mais elle a l’obligation de consulter toutes les personnes concernées ou compétentes, à l’oral ou à l’écrit. Une fois les consultations finies, elle décide seule et annonce sa décision au groupe.</p><p>La personne peut se saisir d’un sujet de sa propre initiative ou celui-ci peut lui être</p>",
+    "avantages": "<ul><li>économe en énergie</li><li>grande créativité</li><li>possible sans être réunis !</li></ul>",
+    "adapte": "<ul><li>décision demandant peu d’actions des autres</li></ul>",
+    "risques": "<ul><li>individualisme et conflis</li><li>écarts de pouvoir</li></ul>",
+    "deconseille": "<ul><li>les sujets conflictuels</li></ul>",
+    "points_cles": "<ul><li>Requiert d’assumer de décider</li><li>Demande un bon niveau de confiance dans le groupe et vis à vis du décideur</li><li>Dépendant de la capacité d’écoute et de synthèse du décideur</li></ul>",
+    "temps": "0013331",
+    "enjeu": "0133210",
+    "simplicite": "33333",
+    "taille_groupe": "33321111",
+    "adhesion": "02321",
+    "creativite": "33321",
+    "besoin_trancher": 8,
+    "sujet_conflictuel": 3,
+    "asynchrone": 11
+}
+
