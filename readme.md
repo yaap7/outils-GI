@@ -6,12 +6,12 @@ Version : 2.1
 
 ## Todolist
 
-* [ ] case pour effacer le formulaire
 * [ ] refaire le résultat de recherche par mot-clés : ne pas afficher ceux qui n'ont pas d'occurence, et donner des points pour le titre.
 * [ ] Faire une plus belle page d'erreur lorsque le processus n'est pas trouvé (fonction `get_processus`).
 * [ ] Prendre en compte l'ID ou le slug pour trouver un processus (fonction `get_processus`).
 * [ ] Réfléchir à rajouter des processus d'élection.
 * [ ] faire une vérification des données insérées en base lors de l'import via `init_db.py`.
+* [x] case pour effacer le formulaire
 * [x] Rajouter le texte des processus d'après le PDf de la boite à outils.
 * [x] Intégrer les modifications de Sacha du 26/12/2023.
 * [x] Convertir tous les processus pour tester les nouveaux critères de Sacha.
