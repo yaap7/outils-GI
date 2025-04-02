@@ -71,7 +71,7 @@ conf = {
         },
         {
             "id": "adhesion",
-            "nom": "Niveau d'adhésion",
+            "nom": "Niveau d'adhésion nécessaire",
             "echelle": [
                 "Faible (être informé)",
                 "",
@@ -82,7 +82,7 @@ conf = {
         },
         {
             "id": "creativite",
-            "nom": "Créativité",
+            "nom": "Besoin de créativité",
             "echelle": [
                 "Faible",
                 "",
@@ -461,11 +461,7 @@ def __get_score(mot_cle: str, phrase: str, score: int):
 @app.route("/recherche_mots-cles")
 def get_recherche_mots_cles():
     """Fonction de recherche par mots clés."""
-    if (
-        "mots-cles" not in request.args
-        or request.args["mots-cles"] is None
-        or request.args["mots-cles"] == ""
-    ):
+    if "mots-cles" not in request.args or request.args["mots-cles"] is None or request.args["mots-cles"] == "":
         return render_template(
             "resultats_recherche_vide.html",
             base_info=base_info,
@@ -510,9 +506,7 @@ def get_recherche_mots_cles():
 def tri_et_retourne_resultats(criteres, score_processus, recherche_par_mot_cle: bool):
     """Fonction qui trie les processus par score et renvoie la page de résultat de la recherche."""
     processus_triees = []
-    for processus, score in sorted(
-        score_processus.items(), key=lambda x: x[1], reverse=True
-    ):
+    for processus, score in sorted(score_processus.items(), key=lambda x: x[1], reverse=True):
         processus_triees.append((processus, score))
     # détermination du gagnant
     meilleur_score = processus_triees[0][1]
