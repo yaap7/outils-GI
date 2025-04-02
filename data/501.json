@@ -2,12 +2,12 @@
     "id": 501,
     "slug": "regle-de-trois",
     "titre": "Règle de trois",
-    "description": "À rédiger",
-    "avantages": "À rédiger",
-    "adapte": "À rédiger",
-    "risques": "À rédiger",
-    "deconseille": "À rédiger",
-    "points_cles": "À rédiger",
+    "description": "<p>Quand une personne a une proposition ou une idée, elle en parle à 2 personnes qu'elle juge légitimes pour valider la proposition.<br>Les 2 personnes en charge de se positionner peuvent répondre comme suit  :</p><ul><li>Joker : (Je passe mon tour car le sujet ne m’intéresse pas, je n’ai pas d’avis, je n’ai pas le temps, …)</li><li>Oui : c’est une bonne idée, je valide –> +1 point pour le décompte</li><li>Non : je ne valide pas –> STOP !<br>L’idée est alors rejetée immédiatement et n’ira pas plus loin, du moins pas avec la règle de trois. Il faudra trouver un autre processus pour la valider.</li><li>Peut-être –> +0 point pour le décompte.<br>Il faut alors trouver une autre personne qui puisse légitimement donner son avis sur la question. La personne qui dit « peut-être » peut recommander de consulter une personne en particulier. Dans ce cas, la recommandation doit être suivie.</li></ul><p>Au bout de 3 « Oui », l’idée est adoptée (en comptant la personne à l’origine de l’idée).</p><p>Au bout de 3 « peut-être » (et pas de non), soit on décide d’abandonner l’idée, soit on réunit les 3 personnes ayant dit « peut-être » pour comparer les arguments. Cela pourra aboutir soit sur une décision, soit sur une nouvelle proposition qui repart à zéro, soit vers un autre processus de décision.</p><p>Librement inspiré de la <a href=\"https://fresqueduclimat.org/projet/association/regle-de-trois/\" target=\"_blank\">règle de trois utilisé par la Fresque du Climat</a>.</p>",
+    "avantages": "Permet une certaine souplesse et une liberté d'initiative",
+    "adapte": "<ul><li>Lorsque les initiatives individuelles doivent être encouragées dans un groupe hétérogène</li><li>Pour les grands groupe où il n'est pas réaliste que tout le monde décide de tout.</li></ul>",
+    "risques": "La personne à l'origine de l'idée doit respecter le besoin de trouver des personnes <strong>qu'elle estime légitime pour décider</strong>.",
+    "deconseille": "<ul><li>En cas de risque de prise de pouvoir par un petit groupe.</li><li>Pour des décisions structurantes ou qui impacteront tout le monde.</li></ul>",
+    "points_cles": "<ul><li>Il faut définir la manière dont les idées (validées ou non) sont transmises au reste du groupe.</li><li>Bien encadrer le périmètre des décisions possibles pour éviter les dérives (maximum 500€, pas d'exclusion, etc).</li></ul>",
     "temps": "0133320",
     "enjeu": "0233100",
     "simplicite": "33333",
@@ -16,5 +16,5 @@
     "creativite": "33320",
     "besoin_trancher": 8,
     "sujet_conflictuel": 2,
-    "asynchrone": 9
+    "asynchrone": 10
 }
