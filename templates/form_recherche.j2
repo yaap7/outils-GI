@@ -2,8 +2,11 @@
     <h2 class="title is-2 text-center" id="titre">
         Recherche par critères de décision
     </h2>
-    <form action="recherche_criteres" method="get">
 
+    <form action="recherche_criteres" method="get">
+        <p class="subtitle is-5">
+            <span class="is-underlined has-text-weight-medium">Notice</span> : Cocher les 2 ou 3 critères les plus importants. Aucun critère n'est obligatoire. Au dela de 5 critères, les résultats seront probablement hasardeux car il n'est pas encore possible de donner une pondération aux critères pour les prioriser.
+        </p>
         {% for critere in conf["criteres"] %}
             <label class="label">{{ critere['nom'] }}</label>
             <div class="table-container">

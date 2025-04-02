@@ -8,7 +8,7 @@ from re import compile
 PROJECT_ROOT = path.dirname(path.realpath(__file__))
 DATABASE_PATH = path.join(PROJECT_ROOT, "database.db")
 
-__VERSION__ = "2.2"
+__VERSION__ = "2.3"
 base_info = {
     "version": __VERSION__,
 }
