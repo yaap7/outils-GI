@@ -14,7 +14,7 @@
                 <thead>
                     <tr>
                         {% for echelle in critere['echelle'] %}
-                        <td>{{ echelle }}</td>
+                            <td>{{ echelle }}</td>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -22,6 +22,28 @@
                     <tr>
                         {% for num in range(critere['echelle'] | length) %}
                         <td><input type="radio" name="{{ critere['id'] }}" value="{{ num }}"></td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        {% endfor %}
+
+        {% for critere_opt in conf["criteres_optionnels"] %}
+            <label class="label">{{ critere_opt['nom'] }}</label>
+            <div class="table-container">
+                <table class="table is-fullwidth text-center table-radio is-borderless">
+                <thead>
+                    <tr>
+                        {% for i in range(13) %}
+                            <td>{{ i }}</td>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {% for num in range(13) %}
+                            <td><input type="radio" name="{{ critere_opt['id'] }}" value="{{ num }}"></td>
                         {% endfor %}
                     </tr>
                 </tbody>

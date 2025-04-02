@@ -321,7 +321,7 @@ def get_processus(slug):
     )
 
 
-def get_processus_score_criteres(processus, criteres_voulus) -> int:
+def get_processus_score_criteres(processus, criteres_voulus, criteres_optionnels_voulus) -> int:
     """Retourne le score d'un processus par rapport aux critères voulus.
     le processus est l'objet retourné par fetchall() de la DB
     Les criteres_voulus sont de cette forme :
@@ -354,6 +354,13 @@ def get_processus_score_criteres(processus, criteres_voulus) -> int:
     indice voulu
 
     alors score = 10 + 4 + 6 - 1 + 1 = 20
+
+
+    pour les critères optionnels, le score gagné est de 6 - la distance entre la valeur souhaitée et la valeur du critère.
+    Si le critère est à -1 (non spécifié), il n'est pas pris en compte dans le calcul.
+    La distance maximale sera de 12 (environ), donc le score prendra une valeur comprise entre -6 et +6.
+    Exemple, je veux un besoin de trancher à 10/12 (fort) mais le processus testé a un besoin de trancher à 3, le score sera de 6 - (10 - 3) = -1
+    Si le processus d'après a un besoin de trancher à 9, alors le score sera de 6 - (10 - 9) = 5.
     """
 
     def get_affinity(critere_processus, indice_voulu, adjacent=0) -> int:
@@ -400,37 +407,37 @@ def get_processus_score_criteres(processus, criteres_voulus) -> int:
             score += get_affinity(processus[critere_voulu], indice_voulu, -2)
         if indice_voulu < (len(processus[critere_voulu]) - 2):
             score += get_affinity(processus[critere_voulu], indice_voulu, 2)
+
+    # calcul du score pour les critères optionnels
+    for critere_optionnel_voulu, valeur_voulue in criteres_optionnels_voulus.items():
+        # si le critère n'est pas défini, on passe (il est optionnel)
+        valeur_du_processus = int(processus[critere_optionnel_voulu])
+        if valeur_du_processus > 12 or valeur_du_processus < 0:
+            continue
+        score += 6 - abs(valeur_du_processus - int(valeur_voulue))
     return score
-
-
-# def get_processus_score_mots_cles(processus, mots_cles):
-#     score = 0
-#     for mot_cle in mots_cles:
-#         if mot_cle in processus["titre"]:
-#             score += 50
-#         if mot_cle in processus["adapte"]:
-#             score += 10
-#         if mot_cle in processus["avantages"]:
-#             score += 10
-#         if mot_cle in processus["points_cles"]:
-#             score += 2
-#         if mot_cle in processus["description"]:
-#             score += 1
-#     return score
 
 
 @app.route("/recherche_criteres")
 def get_recherche_criteres():
     """Fonction de recherche par critères."""
+    # récupération des critères souhaités
     id_criteres = [i["id"] for i in conf["criteres"]]
     criteres_voulus = {}
     for id_critere in id_criteres:
         if id_critere in request.args:
             criteres_voulus[id_critere] = request.args.get(id_critere)
+    # récupération des critères optionnels souhaités
+    id_criteres_optionnels = [i["id"] for i in conf["criteres_optionnels"]]
+    criteres_optionnels_voulus = {}
+    for id_critere in id_criteres_optionnels:
+        if id_critere in request.args:
+            criteres_optionnels_voulus[id_critere] = request.args.get(id_critere)
+    # calcul des scores
     score_processus = {}
     try:
         for processus in retourne_tous_les_processus():
-            score = get_processus_score_criteres(processus, criteres_voulus)
+            score = get_processus_score_criteres(processus, criteres_voulus, criteres_optionnels_voulus)
             score_processus[processus] = score
     except IndexError:
         # pour palier à un attaquant qui mettrait un nombre en dehors du champ
