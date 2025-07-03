@@ -10,7 +10,7 @@
       <h1 class="title is-1 text-center" id="titre">
         Résultats de la recherche
       </h1>
-      <!-- 
+      <!--
         On pourra afficher ça quand on aura des textes pour chaque niveau de critère
       <div>
         <h2 class="title is-2">Critères recherchés</h2>
@@ -21,47 +21,59 @@
         </ul>
       </div>
       -->
+      <div class="columns">
+        <div class="column is-four-fifths">
 
-      <div class="mb-5">
-        <h2 class="title is-2">🥇 Processus recommandé</h2>
-        <p>{{ p_gagnant[0]|p_type_el }} « <a href="processus/{{ p_gagnant[0]['slug'] }}">{{ p_gagnant[0]["titre"] }}</a> » a obtenu un score de {{ p_gagnant[1] }}</p>
-      </div>
+          <div class="mb-5">
+            <h2 class="title is-2">🥇 Processus recommandé</h2>
+            <p>{{ p_gagnant[0]|p_type_el }} « <a href="processus/{{ p_gagnant[0]['slug'] }}">{{ p_gagnant[0]["titre"] }}</a> » a obtenu un score de {{ p_gagnant[1] }}</p>
+          </div>
 
-      {% if p_pertinents %}
-      <div class="mb-5">
-        <h2 class="title is-2">🥈 Autres méthodes pertinentes</h2>
-        <p>Ces processus de décision pourraient également répondre au besoin :</p>
-        <ul>
-          {% for process in p_pertinents %}
-          <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
+          {% if p_pertinents %}
+          <div class="mb-5">
+            <h2 class="title is-2">🥈 Autres méthodes pertinentes</h2>
+            <p>Ces processus de décision pourraient également répondre au besoin :</p>
+            <ul>
+              {% for process in p_pertinents %}
+              <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
 
-      {% if p_autres %}
-      <div class="mb-5">
-        <h2 class="title is-2">🥉 Autres processus</h2>
-        <p>Ces processus ont un score positif, mais ne sont sûrement pas les plus pertinents :</p>
-        <ul>
-          {% for process in p_autres %}
-          <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
+          {% if p_autres %}
+          <div class="mb-5">
+            <h2 class="title is-2">🥉 Autres processus</h2>
+            <p>Ces processus ont un score positif, mais ne sont sûrement pas les plus pertinents :</p>
+            <ul>
+              {% for process in p_autres %}
+              <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
 
-      {% if p_deconseille %}
-      <div class="mb-5">
-        <h2 class="title is-2">❌ Méthodes déconseillées</h2>
-        <p>Ces processus ont renvoyés un score négatif et ne sont pas recommandés :</p>
-        <ul>
-          {% for process in p_deconseille %}
-          <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
+          {% if p_deconseille %}
+          <div class="mb-5">
+            <h2 class="title is-2">❌ Méthodes déconseillées</h2>
+            <p>Ces processus ont renvoyés un score négatif et ne sont pas recommandés :</p>
+            <ul>
+              {% for process in p_deconseille %}
+              <li>{{ process[0]|p_type_el }} « <a href="processus/{{ process[0]['slug']}}">{{ process[0]["titre"] }}</a> » a obtenu un score de {{ process[1] }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+
+        </div>
+
+        <!-- affichage du lien du formulaire pour récupérer les retours -->
+        <div class="column">
+          <h2 class="title is-2">Feedbacks</h2>
+          <p>N'hésitez pas à nous faire vos retours sur ce formulaire : <a href="https://tally.so/r/mRQ9X4" target="_blank">https://tally.so/r/mRQ9X4</a><br>
+          Tous les retours sont étudiés et nous permettront d'améliorer l'outil pour mieux correspondre à vos besoins !</p>
+        </div>
+      </div> <!-- end of columns -->
 
     </div>
   </section>
